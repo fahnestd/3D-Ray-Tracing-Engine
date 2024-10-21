@@ -1,0 +1,155 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59BB3973-5B4D-44D7-999D-E5CFAA8FBD39}|..\\Testing\\Testing.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\testing\\tracertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\src\\collision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:src\\collision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\src\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:src\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\src\\tracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:src\\tracer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\src\\mesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:src\\mesh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\src\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:src\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|c:\\users\\devin\\documents\\oregon state\\cs 406 projects\\3draytracingengine\\src\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}|3DRayTracingEngine.csproj|solutionrelative:src\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TracerTest.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\Testing\\TracerTest.cs",
+              "RelativeDocumentMoniker": "..\\Testing\\TracerTest.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\Testing\\TracerTest.cs",
+              "RelativeToolTip": "..\\Testing\\TracerTest.cs",
+              "ViewState": "AQIAAIkAAAAAAAAAAAAAwLAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T04:24:34.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Tracer.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Tracer.cs",
+              "RelativeDocumentMoniker": "src\\Tracer.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Tracer.cs",
+              "RelativeToolTip": "src\\Tracer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T04:18:41.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Camera.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Camera.cs",
+              "RelativeDocumentMoniker": "src\\Camera.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Camera.cs",
+              "RelativeToolTip": "src\\Camera.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T03:33:02.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Collision.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Collision.cs",
+              "RelativeDocumentMoniker": "src\\Collision.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Collision.cs",
+              "RelativeToolTip": "src\\Collision.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T03:32:57.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Ray.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Ray.cs",
+              "RelativeDocumentMoniker": "src\\Ray.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Ray.cs",
+              "RelativeToolTip": "src\\Ray.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T03:22:13.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Mesh.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Mesh.cs",
+              "RelativeDocumentMoniker": "src\\Mesh.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Mesh.cs",
+              "RelativeToolTip": "src\\Mesh.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T03:04:08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Scene.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Scene.cs",
+              "RelativeDocumentMoniker": "src\\Scene.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\src\\Scene.cs",
+              "RelativeToolTip": "src\\Scene.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T03:03:14.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\devin\\Documents\\Oregon State\\CS 406 Projects\\3DRayTracingEngine\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T01:36:19.55Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
