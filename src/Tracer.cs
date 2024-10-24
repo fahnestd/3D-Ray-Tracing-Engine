@@ -1,5 +1,6 @@
 
 
+using System.Collections.ObjectModel;
 using System.Numerics;
 using System.Runtime.Intrinsics;
 
@@ -10,13 +11,14 @@ namespace _3d_Rendering_Engine.src
     public class Tracer {
 
 
-        public static bool Intersect(Scene scene, Ray ray)
+        public static Collision Intersect(Scene scene, Ray ray)
         {
 
             /**
              * Source for tracing algorithm inspriration
              * https://courses.cs.washington.edu/courses/csep557/09sp/lectures/triangle_intersection.pdf
              */
+            Collision collision = new Collision();
 
             foreach (Mesh mesh in scene.Meshes)
             {
@@ -69,10 +71,15 @@ namespace _3d_Rendering_Engine.src
                     continue;
                 }
 
-                return true;
+                collision.Distance = intersectionDistance;
+                collision.DidCollide = true;
+
+                return collision;
 
             }
-            return false;
+            collision.DidCollide = false;
+
+            return collision;
         }
         protected static bool InsideOutsideEdgeTest(Vector3 v1, Vector3 v2, Vector3 intersectionPoint, Vector3 normal)
         {
