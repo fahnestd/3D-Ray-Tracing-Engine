@@ -54,14 +54,15 @@ namespace _3DRayTracingEngine
         private void Form1_Load(object sender, EventArgs e)
         {
             // New camera facing the positive Z direction
-            Camera camera = new Camera(new Vector3(0,0,0), Vector3.UnitZ, Vector3.UnitY, 80.0f);
+            Camera camera = new Camera(new Vector3(0,0,0), Vector3.UnitZ, Vector3.UnitY, 90.0f);
             scene = new Scene(camera);
 
-            // A basic triangle tilted towards the camera at the top
+            // A basic square shape, but two opposing corners are 1 unit closer to the screen
             Mesh mesh1 = new Mesh();
-            mesh1.AddVertex(-2, -2, 6);
-            mesh1.AddVertex(2, -2, 6);
-            mesh1.AddVertex(0, 1, 2);
+            mesh1.AddVertex(2, 2, 3);
+            mesh1.AddVertex(-2, 2, 4);
+            mesh1.AddVertex(2, -2, 4);
+            mesh1.AddVertex(-2, -2, 3);
             scene.AddMesh(mesh1);
 
             rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);
