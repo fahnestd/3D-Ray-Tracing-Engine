@@ -25,8 +25,8 @@ namespace _3DRayTracingEngine.src
             _height = height;
 
             // Calculating vectors that are right and up from camera for east coordinate manipulation later. camera direction is already forwards.
-            _right = Vector3.Normalize(Vector3.Cross(_camera.direction, _camera.Up));
-            _up = Vector3.Normalize(Vector3.Cross(_right, _camera.direction));
+            _right = Vector3.Normalize(Vector3.Cross(_camera.Direction, _camera.Up));
+            _up = Vector3.Normalize(Vector3.Cross(_right, _camera.Direction));
 
             float aspectRatio = (float)width / (float)height;
 
@@ -73,13 +73,13 @@ namespace _3DRayTracingEngine.src
             float worldY = ndcY * _viewHeight / 2.0f; // Half height because NDCY is -1 to +1
 
             // Calculate the point on the view plane (the view plane is one unit away from the camera)
-            Vector3 pointOnPlane = _camera.direction +
+            Vector3 pointOnPlane = _camera.Direction +
                                  worldX * _right +
                                  worldY * _up;
 
             Ray ray = new Ray()
             {
-                Origin = _camera.position,
+                Origin = _camera.Position,
                 Direction = pointOnPlane
             };
 

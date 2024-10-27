@@ -16,7 +16,7 @@ namespace _3DRayTracingEngine
         private const int WIDTH = 640;
         private const int HEIGHT = 480;
 
-        private const int MAXVIEWDISTANCE = 5;
+        private const int MAXVIEWDISTANCE = 20;
 
         public Form1()
         {
@@ -41,11 +41,12 @@ namespace _3DRayTracingEngine
                         continue;
                     }
 
-                    int brushIntensity = (int)(Math.Max(0, MAXVIEWDISTANCE - collisionBuffer[y, x].Distance) / MAXVIEWDISTANCE * 255);
-                    Brush pixelBrush = new SolidBrush(Color.FromArgb(brushIntensity, brushIntensity, brushIntensity));
-
                     // Draw a 1x1 rectangle for each pixel
+                    float brushIntensity = (Math.Max(0, MAXVIEWDISTANCE - collisionBuffer[y, x].Distance) / MAXVIEWDISTANCE);
+                   
+                    Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(collisionBuffer[y, x].Face.color[0] * brushIntensity), (int)(collisionBuffer[y, x].Face.color[1] * brushIntensity), (int)(collisionBuffer[y, x].Face.color[2] * brushIntensity)));
                     g.FillRectangle(pixelBrush, x, y, 1, 1);
+
                 }
             }
             g.Flush();
@@ -54,15 +55,23 @@ namespace _3DRayTracingEngine
         private void Form1_Load(object sender, EventArgs e)
         {
             // New camera facing the positive Z direction
-            Camera camera = new Camera(new Vector3(0,0,0), Vector3.UnitZ, Vector3.UnitY, 90.0f);
+            Camera camera = new Camera(new Vector3(0,0,-10), Vector3.UnitZ, Vector3.UnitY, 60.0f);
             scene = new Scene(camera);
 
             // A basic square shape, but two opposing corners are 1 unit closer to the screen
             Mesh mesh1 = new Mesh();
             mesh1.AddVertex(2, 2, 3);
             mesh1.AddVertex(-2, 2, 4);
+
+            Face.CurrentColor = [255, 0, 0];
             mesh1.AddVertex(2, -2, 4);
+            
+            Face.CurrentColor = [0, 0, 255];
             mesh1.AddVertex(-2, -2, 3);
+
+            Face.CurrentColor = [125, 0, 125];
+            mesh1.AddVertex(-2, -4, 6);
+
             scene.AddMesh(mesh1);
 
             rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);

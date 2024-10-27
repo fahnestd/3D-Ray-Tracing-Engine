@@ -12,8 +12,8 @@ namespace _3d_Rendering_Engine.src
         float fieldOfView
     )
     {
-        public Vector3 position { get; set; } = position;
-        public Vector3 direction { get; set; } = direction;
+        public Vector3 Position { get; set; } = position;
+        public Vector3 Direction { get; set; } = direction;
         public Vector3 Up { get; set; } = up;
         public float fieldOfView = fieldOfView;
 
@@ -22,8 +22,6 @@ namespace _3d_Rendering_Engine.src
             get { return fieldOfView; }
             set { fieldOfView = Math.Clamp(fieldOfView, 0, 180); }
         }
-
-       
 
     }
 }

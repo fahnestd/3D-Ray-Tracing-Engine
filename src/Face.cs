@@ -11,6 +11,9 @@ namespace _3DRayTracingEngine.src
         public int Vertex1;
         public int Vertex2;
         public int Vertex3;
-        public int[] ?color;
+        public int[] color = CurrentColor;
+
+        public static int[] CurrentColor { get; set; } = [255, 255, 255];
+       
     }
 }

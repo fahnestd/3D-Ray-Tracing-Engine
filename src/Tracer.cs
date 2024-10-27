@@ -73,8 +73,9 @@ namespace _3d_Rendering_Engine.src
                         continue;
                     }
 
-                    collision.Distance = intersectionDistance;
                     collision.DidCollide = true;
+                    collision.Face = face;
+                    collision.Distance = intersectionDistance;
 
                     return collision;
                 }
