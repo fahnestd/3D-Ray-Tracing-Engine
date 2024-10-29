@@ -6,7 +6,7 @@ using System.Runtime.Intrinsics;
 
 
 
-namespace _3d_Rendering_Engine.src
+namespace _3DRayTracingEngine.src
 {
     public class Tracer {
 

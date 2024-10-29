@@ -1,4 +1,3 @@
-using _3d_Rendering_Engine.src;
 using _3DRayTracingEngine.src;
 using System.Numerics;
 
@@ -9,14 +8,12 @@ namespace _3DRayTracingEngine
         private Scene scene;
         private RayGenerator rayGenerator;
 
-
-
         private Collision[,] collisionBuffer;
 
         private const int WIDTH = 640;
         private const int HEIGHT = 480;
 
-        private const int MAXVIEWDISTANCE = 20;
+        private const int MAXVIEWDISTANCE = 25;
 
         public Form1()
         {
@@ -44,7 +41,7 @@ namespace _3DRayTracingEngine
                     // Draw a 1x1 rectangle for each pixel
                     float brushIntensity = (Math.Max(0, MAXVIEWDISTANCE - collisionBuffer[y, x].Distance) / MAXVIEWDISTANCE);
                    
-                    Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(collisionBuffer[y, x].Face.color[0] * brushIntensity), (int)(collisionBuffer[y, x].Face.color[1] * brushIntensity), (int)(collisionBuffer[y, x].Face.color[2] * brushIntensity)));
+                    Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(collisionBuffer[y, x].Face.color.R * brushIntensity), (int)(collisionBuffer[y, x].Face.color.G * brushIntensity), (int)(collisionBuffer[y, x].Face.color.B * brushIntensity)));
                     g.FillRectangle(pixelBrush, x, y, 1, 1);
 
                 }
@@ -63,15 +60,15 @@ namespace _3DRayTracingEngine
             mesh1.AddVertex(2, 2, 3);
             mesh1.AddVertex(-2, 2, 4);
 
-            Face.CurrentColor = [255, 0, 0];
+            Face.CurrentColor = PixelColor.FromRGB(255, 0, 0);
             mesh1.AddVertex(2, -2, 4);
             
-            Face.CurrentColor = [0, 0, 255];
+            Face.CurrentColor = PixelColor.FromRGB(0, 0, 255);
             mesh1.AddVertex(-2, -2, 3);
 
-            Face.CurrentColor = [125, 0, 125];
+            Face.CurrentColor = PixelColor.FromRGB(125, 0, 125);
             mesh1.AddVertex(-2, -4, 6);
-
+            
             scene.AddMesh(mesh1);
 
             rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);

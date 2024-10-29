@@ -2,7 +2,7 @@
 using System;
 using System.Numerics;
 
-namespace _3d_Rendering_Engine.src
+namespace _3DRayTracingEngine.src
 {
     public class Camera
     (
