@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DRayTracingEngine", "3DRayTracingEngine.csproj", "{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Viewer", ".\Viewer\Viewer.csproj", "{2ADD334B-FC91-4CDA-AC27-87A3A15A3C49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "..\Testing\Testing.csproj", "{59BB3973-5B4D-44D7-999D-E5CFAA8FBD39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", ".\Testing\Testing.csproj", "{59BB3973-5B4D-44D7-999D-E5CFAA8FBD39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
