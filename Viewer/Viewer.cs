@@ -25,9 +25,6 @@ namespace Viewer
             if (collisionBuffer == null) return;
 
             Graphics g = e.Graphics;
-
-            Brush blackBrush = new SolidBrush(Color.Black);
-            Brush whiteBrush = new SolidBrush(Color.White);
             
             for (int y = 0; y < HEIGHT; y++)
             {
@@ -51,9 +48,10 @@ namespace Viewer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // New camera facing the positive Z direction
+            // Create a new Scene
+            scene = new Scene();
+            // Create a new camera facing the positive Z direction
             Camera camera = new Camera(new Vector3(0,0,-10), Vector3.UnitZ, Vector3.UnitY, 60.0f);
-            scene = new Scene(camera);
 
             // A basic square shape, but two opposing corners are 1 unit closer to the screen
             Mesh mesh1 = new Mesh();
@@ -65,15 +63,17 @@ namespace Viewer
             
             Face.CurrentColor = PixelColor.FromRGB(0, 0, 255);
             mesh1.AddVertex(-2, -2, 3);
-
-            Face.CurrentColor = PixelColor.FromRGB(125, 0, 125);
-            mesh1.AddVertex(-2, -4, 6);
             
+            // Add the mesh to the scene
             scene.AddMesh(mesh1);
 
+            // Create a new RayGenerator and specify the camera, height, and width in pixels
             rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);
+
+            // Generate rays for the scene
             Ray[,] rays = rayGenerator.GenerateRays();
 
+            // Loop through pixels and store collisions
             collisionBuffer = new Collision[HEIGHT, WIDTH];
 
             for (int y = 0; y < HEIGHT; y++)

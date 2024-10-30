@@ -3,12 +3,8 @@ using System.Collections.Generic;
 
 namespace Engine
 {
-    public class Scene(
-        Camera camera
-    )
+    public class Scene
     {
-        public Camera Camera = camera;
-
         public List<Mesh> Meshes { get; } = [];
 
         public void AddMesh(Mesh mesh)
