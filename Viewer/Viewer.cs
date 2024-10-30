@@ -1,9 +1,9 @@
-using _3DRayTracingEngine.src;
+using Engine;
 using System.Numerics;
 
-namespace _3DRayTracingEngine
+namespace Viewer
 {
-    public partial class Form1 : Form
+    public partial class Viewer : Form
     {
         private Scene scene;
         private RayGenerator rayGenerator;
@@ -15,7 +15,7 @@ namespace _3DRayTracingEngine
 
         private const int MAXVIEWDISTANCE = 25;
 
-        public Form1()
+        public Viewer()
         {
             InitializeComponent();
         }

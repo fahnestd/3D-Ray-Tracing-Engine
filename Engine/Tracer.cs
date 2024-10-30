@@ -1,12 +1,8 @@
-
-using _3DRayTracingEngine.src;
 using System.Collections.ObjectModel;
 using System.Numerics;
 using System.Runtime.Intrinsics;
 
-
-
-namespace _3DRayTracingEngine.src
+namespace Engine
 {
     public class Tracer {
 

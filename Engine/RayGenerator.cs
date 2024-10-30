@@ -1,8 +1,8 @@
-﻿
-using System.Numerics;
-namespace _3DRayTracingEngine.src
+﻿using System.Numerics;
+
+namespace Engine
 {
-    internal class RayGenerator
+    public class RayGenerator
     {
         private readonly Camera _camera;
         private readonly int _width;

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _3DRayTracingEngine.src
+namespace Engine
 {
     public class Scene(
         Camera camera

@@ -1,8 +1,6 @@
-
-using System;
 using System.Numerics;
 
-namespace _3DRayTracingEngine.src
+namespace Engine
 {
    
 

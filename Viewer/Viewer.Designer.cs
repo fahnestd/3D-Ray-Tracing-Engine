@@ -1,6 +1,6 @@
-﻿namespace _3DRayTracingEngine
+﻿namespace Viewer
 {
-    partial class Form1
+    partial class Viewer
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,14 +30,14 @@
         {
             SuspendLayout();
             // 
-            // Form1
+            // Viewer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Viewer";
+            Text = "3D Ray Tracing Engine Demo";
             Load += Form1_Load;
             Paint += Form1_Paint;
             ResumeLayout(false);

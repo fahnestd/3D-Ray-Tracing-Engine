@@ -1,8 +1,6 @@
-
-
 using System.Numerics;
 
-namespace _3DRayTracingEngine.src
+namespace Engine
 {
     public record Collision
     {
