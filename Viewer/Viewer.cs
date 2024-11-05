@@ -55,17 +55,29 @@ namespace Viewer
 
             // A basic square shape, but two opposing corners are 1 unit closer to the screen
             Mesh mesh1 = new Mesh();
-            mesh1.AddVertex(2, 2, 3);
-            mesh1.AddVertex(-2, 2, 4);
 
             Face.CurrentColor = PixelColor.FromRGB(255, 0, 0);
-            mesh1.AddVertex(2, -2, 4);
+
+            mesh1.AddVertex(2, 2, 6);
+            mesh1.AddVertex(-2, 2, 6);
+            mesh1.AddVertex(2, -2, 2);
+            mesh1.AddVertex(-2, -2, 2);
+
+
+            // A basic square shape, but two opposing corners are 1 unit closer to the screen
+            Mesh mesh2 = new Mesh();
+
+            Face.CurrentColor = PixelColor.FromRGB(0, 255, 0);
             
-            Face.CurrentColor = PixelColor.FromRGB(0, 0, 255);
-            mesh1.AddVertex(-2, -2, 3);
-            
+            mesh2.AddVertex(2, 2, 4);
+            mesh2.AddVertex(-2, 2, 4);
+            mesh2.AddVertex(2, -2, 4);
+            mesh2.AddVertex(-2, -2, 4);
+
+
             // Add the mesh to the scene
             scene.AddMesh(mesh1);
+            scene.AddMesh(mesh2);
 
             // Create a new RayGenerator and specify the camera, height, and width in pixels
             rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);

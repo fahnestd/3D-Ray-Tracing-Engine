@@ -9,7 +9,7 @@ namespace Testing
         [SetUp]
         public void Setup()
         {
-            scene = new Scene(new Camera(Vector3.Zero, Vector3.UnitZ, Vector3.UnitY, 60.0f));
+            scene = new Scene();
 
         }
 

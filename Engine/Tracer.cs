@@ -15,6 +15,7 @@ namespace Engine
              * https://courses.cs.washington.edu/courses/csep557/09sp/lectures/triangle_intersection.pdf
              */
             Collision collision = new Collision();
+            collision.Distance = float.PositiveInfinity;
 
             foreach (Mesh mesh in scene.Meshes)
             {
@@ -68,13 +69,18 @@ namespace Engine
                     {
                         continue;
                     }
-
-                    collision.DidCollide = true;
-                    collision.Face = face;
-                    collision.Distance = intersectionDistance;
-
-                    return collision;
+                    if (collision.Distance > intersectionDistance)
+                    {
+                        collision.DidCollide = true;
+                        collision.Face = face;
+                        collision.Distance = intersectionDistance;
+                    }
                 }
+
+            }
+            if (collision.DidCollide)
+            {
+                return collision;
             }
             collision.DidCollide = false;
 
