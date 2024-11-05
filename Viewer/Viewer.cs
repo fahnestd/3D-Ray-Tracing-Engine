@@ -1,4 +1,5 @@
 using Engine;
+using System.Globalization;
 using System.Numerics;
 
 namespace Viewer
@@ -62,7 +63,7 @@ namespace Viewer
             mesh1.AddVertex(-2, 2, 6);
             mesh1.AddVertex(2, -2, 2);
             mesh1.AddVertex(-2, -2, 2);
-
+            mesh1.CalculateNormalsFromVertices();
 
             // A basic square shape, but two opposing corners are 1 unit closer to the screen
             Mesh mesh2 = new Mesh();
@@ -73,7 +74,7 @@ namespace Viewer
             mesh2.AddVertex(-2, 2, 4);
             mesh2.AddVertex(2, -2, 4);
             mesh2.AddVertex(-2, -2, 4);
-
+            mesh2.CalculateNormalsFromVertices();
 
             // Add the mesh to the scene
             scene.AddMesh(mesh1);

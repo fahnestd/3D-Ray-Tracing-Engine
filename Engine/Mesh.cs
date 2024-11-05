@@ -57,5 +57,17 @@ namespace Engine
                 Faces.Add(face);
             }
         }
+
+        public void CalculateNormalsFromVertices()
+        {
+            foreach (Face face in Faces)
+            {
+                Vector3 U = Vertices[face.Vertex2] - Vertices[face.Vertex1];
+                Vector3 V = Vertices[face.Vertex3] - Vertices[face.Vertex1];
+                Vector3 Normal = Vector3.Cross(U, V);
+                Vector3 UnitNormal = Vector3.Normalize(Normal);
+                face.SetNormal(UnitNormal);
+            }
+        }
     }
 }

@@ -69,6 +69,8 @@ namespace Engine
                     {
                         continue;
                     }
+
+                    // Check if collision is closer than the last closest collision and set face as collision face if so.
                     if (collision.Distance > intersectionDistance)
                     {
                         collision.DidCollide = true;
