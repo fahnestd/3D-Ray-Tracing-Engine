@@ -1,3 +1,4 @@
+using _3DRayTracingEngine;
 using Engine;
 using System.Globalization;
 using System.Numerics;
@@ -15,6 +16,8 @@ namespace Viewer
         private const int HEIGHT = 480;
 
         private const int MAXVIEWDISTANCE = 25;
+
+        private const float MINBRIGHTNESS = 0.1f;
 
         public Viewer()
         {
@@ -37,8 +40,9 @@ namespace Viewer
                     }
 
                     // Draw a 1x1 rectangle for each pixel
-                    float brushIntensity = (Math.Max(0, MAXVIEWDISTANCE - collisionBuffer[y, x].Distance) / MAXVIEWDISTANCE);
-                   
+                    //float brushIntensity = (Math.Max(0, MAXVIEWDISTANCE - collisionBuffer[y, x].Distance) / MAXVIEWDISTANCE);
+                    float brushIntensity = Math.Max(MINBRIGHTNESS, collisionBuffer[y, x].Face.lightness);
+
                     Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(collisionBuffer[y, x].Face.color.R * brushIntensity), (int)(collisionBuffer[y, x].Face.color.G * brushIntensity), (int)(collisionBuffer[y, x].Face.color.B * brushIntensity)));
                     g.FillRectangle(pixelBrush, x, y, 1, 1);
 
@@ -49,36 +53,13 @@ namespace Viewer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Create a new Scene
-            scene = new Scene();
+            // Create a new Scene and load in a sample
+            scene = SampleScenes.PawnOBJ();
             // Create a new camera facing the positive Z direction
             Camera camera = new Camera(new Vector3(0,0,-10), Vector3.UnitZ, Vector3.UnitY, 60.0f);
 
-            // A basic square shape, but two opposing corners are 1 unit closer to the screen
-            Mesh mesh1 = new Mesh();
-
-            Face.CurrentColor = PixelColor.FromRGB(255, 0, 0);
-
-            mesh1.AddVertex(2, 2, 6);
-            mesh1.AddVertex(-2, 2, 6);
-            mesh1.AddVertex(2, -2, 2);
-            mesh1.AddVertex(-2, -2, 2);
-            mesh1.CalculateNormalsFromVertices();
-
-            // A basic square shape, but two opposing corners are 1 unit closer to the screen
-            Mesh mesh2 = new Mesh();
-
-            Face.CurrentColor = PixelColor.FromRGB(0, 255, 0);
-            
-            mesh2.AddVertex(2, 2, 4);
-            mesh2.AddVertex(-2, 2, 4);
-            mesh2.AddVertex(2, -2, 4);
-            mesh2.AddVertex(-2, -2, 4);
-            mesh2.CalculateNormalsFromVertices();
-
-            // Add the mesh to the scene
-            scene.AddMesh(mesh1);
-            scene.AddMesh(mesh2);
+            // Calculates lighting for the scene
+            scene.Bake();
 
             // Create a new RayGenerator and specify the camera, height, and width in pixels
             rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);

@@ -14,7 +14,8 @@ namespace Engine
         public enum Mode
         {
             TRIANGLE_STRIPS,
-            TRIANGLE_FAN
+            TRIANGLE_FAN,
+            LOAD
         }
 
         // for vertex 3 and greater, we start performing a line strip, so the last 2 vertices are connected to the new one.
@@ -56,6 +57,11 @@ namespace Engine
                 face.Vertex3 = Vertices.Count - 1;
                 Faces.Add(face);
             }
+        }
+
+        public void AddFace(Face face)
+        {
+            Faces.Add(face);
         }
 
         public void CalculateNormalsFromVertices()

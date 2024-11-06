@@ -10,12 +10,27 @@ namespace Engine
         public int Vertex3;
         public Vector3 Normal = Vector3.Zero;
         public PixelColor color = CurrentColor;
+        public float shininess = 0f;
+        public float lightness = 0f;
 
         public static PixelColor CurrentColor { get; set; } = PixelColor.FromRGB(255, 255, 255);
 
         public void SetNormal(Vector3 normal)
         {
-            Normal = normal;
+           Normal = normal;
+        }
+
+        /**
+         *  Calculates the face normal given 3 vertex normals
+         */
+        public void SetNormal(Vector3 v1Normal, Vector3 v2Normal, Vector3 v3Normal)
+        {
+            Normal = (v1Normal + v2Normal + v3Normal) / 3;
+        }
+
+        public void CalculateLightEffect(Light light)
+        {
+            lightness += Vector3.Dot(Normal, light.Direction);
         }
        
     }
