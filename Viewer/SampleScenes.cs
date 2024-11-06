@@ -71,7 +71,7 @@ namespace _3DRayTracingEngine
 
             Light light1 = new Light();
             light1.Position = new Vector3(0, 15, 0);
-            light1.Direction = Vector3.Normalize(new Vector3(0, 1, -1));
+            light1.Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1));
 
             scene.AddLight(light1);
 

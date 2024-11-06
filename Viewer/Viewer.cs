@@ -40,7 +40,6 @@ namespace Viewer
                     }
 
                     // Draw a 1x1 rectangle for each pixel
-                    //float brushIntensity = (Math.Max(0, MAXVIEWDISTANCE - collisionBuffer[y, x].Distance) / MAXVIEWDISTANCE);
                     float brushIntensity = Math.Max(MINBRIGHTNESS, collisionBuffer[y, x].Face.lightness);
 
                     Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(collisionBuffer[y, x].Face.color.R * brushIntensity), (int)(collisionBuffer[y, x].Face.color.G * brushIntensity), (int)(collisionBuffer[y, x].Face.color.B * brushIntensity)));
