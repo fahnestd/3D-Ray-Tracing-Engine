@@ -1,5 +1,6 @@
-using _3DRayTracingEngine;
 using Engine;
+using Engine.Tracers;
+using System.Diagnostics;
 using System.Globalization;
 using System.Numerics;
 
@@ -7,13 +8,10 @@ namespace Viewer
 {
     public partial class Viewer : Form
     {
-        private Scene scene;
-        private RayGenerator rayGenerator;
+        private Scene ?scene;
 
-        private Collision[,] collisionBuffer;
+        private Tracer ?Tracer;
 
-        private const int WIDTH = 640;
-        private const int HEIGHT = 480;
 
         private const int MAXVIEWDISTANCE = 25;
 
@@ -26,23 +24,23 @@ namespace Viewer
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (collisionBuffer == null) return;
+            if (Tracer == null || Tracer.CollisionBuffer == null) return;
 
             Graphics g = e.Graphics;
             
-            for (int y = 0; y < HEIGHT; y++)
+            for (int x = 0; x < Tracer.Width; x++)
             {
-                for (int x = 0; x < WIDTH; x++)
+                for (int y = 0; y < Tracer.Height; y++)
                 {
-                    if (!collisionBuffer[y, x].DidCollide)
+                    if (!Tracer.CollisionBuffer[x, y].DidCollide)
                     {
                         continue;
                     }
 
                     // Draw a 1x1 rectangle for each pixel
-                    float brushIntensity = Math.Max(MINBRIGHTNESS, collisionBuffer[y, x].Face.lightness);
+                    float brushIntensity = Math.Max(MINBRIGHTNESS, Tracer.CollisionBuffer[x, y].Face.lightness);
 
-                    Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(collisionBuffer[y, x].Face.color.R * brushIntensity), (int)(collisionBuffer[y, x].Face.color.G * brushIntensity), (int)(collisionBuffer[y, x].Face.color.B * brushIntensity)));
+                    Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(Tracer.CollisionBuffer[x, y].Face.color.R * brushIntensity), (int)(Tracer.CollisionBuffer[x, y].Face.color.G * brushIntensity), (int)(Tracer.CollisionBuffer[x, y].Face.color.B * brushIntensity)));
                     g.FillRectangle(pixelBrush, x, y, 1, 1);
 
                 }
@@ -56,26 +54,17 @@ namespace Viewer
             scene = SampleScenes.PawnOBJ();
             // Create a new camera facing the positive Z direction
             Camera camera = new Camera(new Vector3(0,0,-10), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            scene.AddCamera(camera);
 
             // Calculates lighting for the scene
             scene.Bake();
 
-            // Create a new RayGenerator and specify the camera, height, and width in pixels
-            rayGenerator = new RayGenerator(camera, WIDTH, HEIGHT);
-
-            // Generate rays for the scene
-            Ray[,] rays = rayGenerator.GenerateRays();
-
-            // Loop through pixels and store collisions
-            collisionBuffer = new Collision[HEIGHT, WIDTH];
-
-            for (int y = 0; y < HEIGHT; y++)
-            {
-                for (int x = 0; x < WIDTH; x++)
-                {
-                    collisionBuffer[y, x] = Tracer.Intersect(scene, rays[y, x]);
-                }
-            }
+            Tracer = new BVHTracer(scene);
+            float rayTraceTime = 0;
+            var sw = Stopwatch.StartNew();
+            Tracer.GetCollisionBuffer();
+            sw.Stop();
+            Debug.WriteLine($"Successfully traced scene in {sw.ElapsedMilliseconds} ms");
 
             Invalidate();
         }

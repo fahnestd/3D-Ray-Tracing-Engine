@@ -33,13 +33,13 @@ namespace Engine
         // Initializes a new ray for each pixel in the image by setting up its origin and direction.
         public Ray[,] GenerateRays()
         {
-            Ray[,] rays = new Ray[_height, _width];
+            Ray[,] rays = new Ray[_width, _height];
 
-            for (int j = 0; j < _height; j++)
+            for (int x = 0; x < _width; x++)
             {
-                for (int i = 0; i < _width; i++)
+                for (int y = 0; y < _height; y++)
                 {
-                    rays[j, i] = GenerateRayForPixel(i, j);
+                    rays[x, y] = GenerateRayForPixel(x, y);
                 }
             }
 
@@ -47,11 +47,11 @@ namespace Engine
         }
 
         // Handles actually creating the 
-        private Ray GenerateRayForPixel(int i, int j)
+        private Ray GenerateRayForPixel(int x, int y)
         {
             // center the coordinates
-            float pixelCenterX = i + 0.5f;
-            float pixelCenterY = j + 0.5f;
+            float pixelCenterX = x + 0.5f;
+            float pixelCenterY = y + 0.5f;
 
             // Normalize the coordinates
             float normalizedX = pixelCenterX / _width;

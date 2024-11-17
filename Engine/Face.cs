@@ -4,6 +4,9 @@ using System.Numerics;
 namespace Engine
 {
     public class Face
+    (
+        Mesh mesh    
+    )
     {
         public int Vertex1;
         public int Vertex2;
@@ -12,6 +15,7 @@ namespace Engine
         public PixelColor color = CurrentColor;
         public float shininess = 0f;
         public float lightness = 0f;
+        public Mesh Mesh { get; set; } = mesh;
 
         public static PixelColor CurrentColor { get; set; } = PixelColor.FromRGB(255, 255, 255);
 
@@ -33,5 +37,10 @@ namespace Engine
             lightness += Vector3.Dot(Normal, light.Direction);
         }
        
+        public Vector3 Center
+        {
+            get { return (Mesh.Vertices[Vertex1] + Mesh.Vertices[Vertex2] + Mesh.Vertices[Vertex3]) / 3; }
+        }
+
     }
 }

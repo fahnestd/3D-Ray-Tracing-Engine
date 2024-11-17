@@ -47,7 +47,7 @@ namespace Engine
                                 string[] v2 = parts[2].Split(new char[] { '/' });
                                 string[] v3 = parts[3].Split(new char[] { '/' });
 
-                                Face face = new Face();
+                                Face face = new Face(mesh);
 
                                 face.Vertex1 = int.Parse(v1[0]) - 1;
                                 face.Vertex2 = int.Parse(v2[0]) - 1;
@@ -65,7 +65,7 @@ namespace Engine
                             }
                             else
                             {
-                                Face face = new Face();
+                                Face face = new Face(mesh);
 
                                 face.Vertex1 = int.Parse(parts[1]) - 1;
                                 face.Vertex2 = int.Parse(parts[2]) - 1;
