@@ -16,7 +16,6 @@ namespace Engine
                 Mesh mesh = new Mesh();
                 mesh.FaceMode = Mesh.Mode.LOAD;
                 IEnumerable<string> file = File.ReadLines(filename);
-                List<Vector3> Normals = [];
 
                 foreach (string item in file)
                 {
@@ -37,7 +36,7 @@ namespace Engine
                         case "vt":
                             break;
                         case "vn":
-                            Normals.Add(new Vector3(float.Parse(parts[1]), float.Parse(parts[2]), float.Parse(parts[3])));
+                            mesh.Normals.Add(new Vector3(float.Parse(parts[1]), float.Parse(parts[2]), float.Parse(parts[3])));
                             break;
                         case "f":
                             // Check if were dealing with normals or not.
@@ -53,10 +52,10 @@ namespace Engine
                                 face.Vertex2 = int.Parse(v2[0]) - 1;
                                 face.Vertex3 = int.Parse(v3[0]) - 1;
 
-                                face.SetNormal(
-                                    Normals[int.Parse(v1[2]) - 1],
-                                    Normals[int.Parse(v2[2]) - 1],
-                                    Normals[int.Parse(v3[2]) - 1]
+                                face.SetFaceNormal(
+                                    mesh.Normals[int.Parse(v1[2]) - 1],
+                                    mesh.Normals[int.Parse(v2[2]) - 1],
+                                    mesh.Normals[int.Parse(v3[2]) - 1]
                                 );
 
                                 mesh.Faces.Add(face);

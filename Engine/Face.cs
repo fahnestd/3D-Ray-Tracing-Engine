@@ -27,8 +27,9 @@ namespace Engine
         /**
          *  Calculates the face normal given 3 vertex normals
          */
-        public void SetNormal(Vector3 v1Normal, Vector3 v2Normal, Vector3 v3Normal)
+        public void SetFaceNormal(Vector3 v1Normal, Vector3 v2Normal, Vector3 v3Normal)
         {
+
             Normal = (v1Normal + v2Normal + v3Normal) / 3;
         }
 
@@ -41,6 +42,5 @@ namespace Engine
         {
             get { return (Mesh.Vertices[Vertex1] + Mesh.Vertices[Vertex2] + Mesh.Vertices[Vertex3]) / 3; }
         }
-
     }
 }

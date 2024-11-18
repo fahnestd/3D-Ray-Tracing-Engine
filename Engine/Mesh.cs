@@ -9,6 +9,7 @@ namespace Engine
         public Vector3 Position { get; set; } = Vector3.Zero;
         public List<Face> Faces = [];
         public List<Vector3> Vertices { get; } = [];
+        public List<Vector3> Normals { get; } = [];
 
         public Scene Scene { get; set; }
 
