@@ -1,15 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Numerics;
 
 namespace Engine
 {
     public class Scene
     {
         public List<Mesh> Meshes { get; } = [];
+        public List<Face> Faces { get; } = [];
         public List<Light> Lights { get; } = [];
+        public List<Camera> Cameras { get; private set; } = [new Camera(Vector3.Zero, Vector3.UnitX,Vector3.UnitY, 60)];
+        public int ActiveCamera { get; set; } = 0;
 
         public void AddMesh(Mesh mesh)
         {
+            var sw = Stopwatch.StartNew();
+            mesh.CalculateBoundingBox();
+            sw.Stop();
+            Debug.WriteLine($"Successfully build BVH in {sw.ElapsedMilliseconds} ms");
             Meshes.Add(mesh);
         }
 
@@ -41,6 +50,25 @@ namespace Engine
 
                 }
             }
+        }
+
+        public void AddCamera(Camera camera, bool setAsActive = true)
+        {
+            Cameras.Add(camera);
+            if (setAsActive)
+            {
+                ActiveCamera = Cameras.IndexOf(camera);
+            }
+        }
+
+        public void RemoveCamera(Camera camera)
+        {
+            if (Cameras.Count == 1)
+            {
+                Debug.WriteLine("Error attempting to remove the last remaining camera");
+                return;
+            }
+            Cameras.Remove(camera);
         }
     }
 

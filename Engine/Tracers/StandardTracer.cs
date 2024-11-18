@@ -2,14 +2,12 @@ using System.Collections.ObjectModel;
 using System.Numerics;
 using System.Runtime.Intrinsics;
 
-namespace Engine
+namespace Engine.Tracers
 {
-    public class Tracer {
-
-
-        public static Collision Intersect(Scene scene, Ray ray)
+    public class StandardTracer(Scene scene): Tracer(scene)
+    {
+        public override Collision RayTrace(Ray ray)
         {
-
             /**
              * Source for tracing algorithm inspriration
              * https://courses.cs.washington.edu/courses/csep557/09sp/lectures/triangle_intersection.pdf
@@ -17,7 +15,7 @@ namespace Engine
             Collision collision = new Collision();
             collision.Distance = float.PositiveInfinity;
 
-            foreach (Mesh mesh in scene.Meshes)
+            foreach (Mesh mesh in Scene.Meshes)
             {
                 foreach (Face face in mesh.Faces)
                 {
@@ -26,7 +24,7 @@ namespace Engine
                     Vector3 v2 = mesh.Vertices[face.Vertex3];
 
                     // Normal = (v1 - v0) x (v2 - v0)
-                    Vector3 normal = Vector3.Cross((v1 - v0), (v2 - v0));
+                    Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
                     normal = Vector3.Normalize(normal);
 
                     // find the distance from the plane

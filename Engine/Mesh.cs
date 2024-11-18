@@ -1,3 +1,4 @@
+using Engine.BVH;
 using System.Numerics;
 
 namespace Engine
@@ -5,11 +6,15 @@ namespace Engine
    
 
     public class Mesh() {
-        public List<Vector3> Vertices { get; } = [];
         public Vector3 Position { get; set; } = Vector3.Zero;
         public List<Face> Faces = [];
+        public List<Vector3> Vertices { get; } = [];
+
+        public Scene Scene { get; set; }
 
         public Mode FaceMode { get; set; } = Mode.TRIANGLE_STRIPS;
+        public BVHNode BVHTree { get; set; }
+
 
         public enum Mode
         {
@@ -38,7 +43,7 @@ namespace Engine
             // Start creating a triangle strip
             if (Vertices.Count > 2)
             {
-                Face face = new Face();
+                Face face = new Face(this);
                 face.Vertex1 = Vertices.Count - 3;
                 face.Vertex2 = Vertices.Count - 2;
                 face.Vertex3 = Vertices.Count - 1;
@@ -51,7 +56,7 @@ namespace Engine
             // Start creating a triangle fan
             if (Vertices.Count > 2)
             {
-                Face face = new Face();
+                Face face = new Face(this);
                 face.Vertex1 = 0;
                 face.Vertex2 = Vertices.Count - 2;
                 face.Vertex3 = Vertices.Count - 1;
@@ -74,6 +79,12 @@ namespace Engine
                 Vector3 UnitNormal = Vector3.Normalize(Normal);
                 face.SetNormal(UnitNormal);
             }
+        }
+
+        public void CalculateBoundingBox()
+        {
+            BVH.BVH bvh = new BVH.BVH(this);
+            BVHTree = bvh.Root;
         }
     }
 }
