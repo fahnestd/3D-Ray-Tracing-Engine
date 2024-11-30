@@ -40,7 +40,30 @@ namespace Engine.Tracers
             }
 
             CollisionBuffer = collisionBuffer;
-            return collisionBuffer;
+            LayerReflect();
+            return CollisionBuffer;
+        }
+
+        public void LayerReflect()
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    if (CollisionBuffer[x, y].DidCollide)
+                    {
+                        Ray ray = new Ray();
+                        ray.Direction = CollisionBuffer[x, y].getIncidentVector();
+                        ray.Origin = CollisionBuffer[x, y].CollisionPoint;
+                        Collision collision = RayTrace(ray);
+                        if (collision.DidCollide)
+                        {
+                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, .10f);
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

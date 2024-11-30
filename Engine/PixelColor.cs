@@ -44,5 +44,12 @@ namespace Engine
                 B = (int)(color.B * value)
             };
         }
+
+        public void LayerColor(PixelColor Color, float Percent)
+        {
+            R += (int)(Color.R * Percent);
+            G += (int)(Color.G * Percent);
+            B += (int)(Color.B * Percent);
+        }
     }
 }
