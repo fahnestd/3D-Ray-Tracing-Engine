@@ -60,7 +60,6 @@ namespace Viewer
             scene.Bake();
 
             Tracer = new BVHTracer(scene);
-            float rayTraceTime = 0;
             var sw = Stopwatch.StartNew();
             Tracer.GetCollisionBuffer();
             sw.Stop();
