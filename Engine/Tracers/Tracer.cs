@@ -31,7 +31,7 @@ namespace Engine.Tracers
 
             // Loop through pixels and store collisions
             Collision[,] collisionBuffer = new Collision[Width, Height];
-
+            
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
@@ -64,7 +64,7 @@ namespace Engine.Tracers
                         Collision collision = RayTrace(ray);
                         if (collision.DidCollide)
                         {
-                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, .20f);
+                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, CollisionBuffer[x, y].Face.Mesh.reflectivity);
                         }
                     }
                 }

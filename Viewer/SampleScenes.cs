@@ -84,10 +84,17 @@ namespace Viewer
             Mesh? mesh = Import.fromObjectFile("../../../assets/obj/teapot.obj");
             if (mesh != null)
             {
-                mesh.Scale(2f);
-                //mesh.TransformX(-1.5f);
-                mesh.TransformY(-2.5f);
+                mesh.setColor(PixelColor.FromRGB(255, 0, 0));
+                mesh.reflectivity = .3f;
                 scene.AddMesh(mesh);
+            }
+
+            Mesh? mesh2 = Import.fromObjectFile("../../../assets/obj/teapot-reflection.obj");
+            if (mesh2 != null)
+            {
+                mesh2.reflectivity = 1f;
+                mesh2.setColor(PixelColor.FromRGB(50, 50, 100));
+                scene.AddMesh(mesh2);
             }
 
             Light light1 = new Light();
@@ -95,6 +102,12 @@ namespace Viewer
             light1.Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1));
 
             scene.AddLight(light1);
+
+            Light light2 = new Light();
+            light2.Position = new Vector3(0, -15, 0);
+            light2.Direction = Vector3.Normalize(new Vector3(-0.5f, 1, 1));
+
+            scene.AddLight(light2);
 
             return scene;
         }

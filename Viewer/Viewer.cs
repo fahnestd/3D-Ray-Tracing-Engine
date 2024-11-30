@@ -53,14 +53,13 @@ namespace Viewer
             // Create a new Scene and load in a sample
             scene = SampleScenes.TeapotOBJ();
             // Create a new camera facing the positive Z direction
-            Camera camera = new Camera(new Vector3(0,0,-10), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            Camera camera = new Camera(new Vector3(0,0,-4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
             scene.AddCamera(camera);
 
             // Calculates lighting for the scene
             scene.Bake();
 
             Tracer = new BVHTracer(scene);
-            float rayTraceTime = 0;
             var sw = Stopwatch.StartNew();
             Tracer.GetCollisionBuffer();
             sw.Stop();

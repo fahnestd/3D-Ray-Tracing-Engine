@@ -16,6 +16,7 @@ namespace Engine
 
         public Mode FaceMode { get; set; } = Mode.TRIANGLE_STRIPS;
         public BVHNode BVHTree { get; set; }
+        public float reflectivity { get; set; } = 0f;
 
 
         public enum Mode
@@ -134,6 +135,17 @@ namespace Engine
                 NewVertices.Add(new Vector3(Vertex.X, Vertex.Y, Vertex.Z + Amount));
             }
             Vertices = NewVertices;
+        }
+
+        public void setColor(PixelColor Color)
+        {
+            List<Face> NewFaces = [];
+            foreach (var Face in Faces)
+            {
+                Face.color = Color;
+                NewFaces.Add(Face);
+            }
+            Faces = NewFaces;
         }
     }
 }
