@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
@@ -54,11 +55,16 @@ namespace Engine.Tracers
                     {
                         Ray ray = new Ray();
                         ray.Direction = CollisionBuffer[x, y].getIncidentVector();
-                        ray.Origin = CollisionBuffer[x, y].CollisionPoint;
+
+                        // https://stackoverflow.com/questions/41211892/ray-tracer-artifacts-with-reflection
+                        // I was seeing specs across the model, and found this article about it being due to limited precision making some points reflect the back of the current face.
+                        // Fix was to nudge the reflection origin slightly off the surface.
+                        Vector3 NudgedOrigin = CollisionBuffer[x, y].CollisionPoint + CollisionBuffer[x, y].CollisionNormal * (float)1e-5;
+                        ray.Origin = NudgedOrigin;
                         Collision collision = RayTrace(ray);
                         if (collision.DidCollide)
                         {
-                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, .10f);
+                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, .20f);
                         }
                     }
                 }

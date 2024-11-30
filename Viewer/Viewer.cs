@@ -15,7 +15,7 @@ namespace Viewer
 
         private const int MAXVIEWDISTANCE = 25;
 
-        private const float MINBRIGHTNESS = 0.1f;
+        private const float MINBRIGHTNESS = 0.05f;
 
         public Viewer()
         {
@@ -39,9 +39,8 @@ namespace Viewer
 
                     // Draw a 1x1 rectangle for each pixel
                     float brushIntensity = Math.Max(MINBRIGHTNESS, Tracer.CollisionBuffer[x, y].Face.lightness);
-
-                    Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(Tracer.CollisionBuffer[x, y].Color.R), (int)(Tracer.CollisionBuffer[x, y].Color.G), (int)(Tracer.CollisionBuffer[x, y].Color.B)));
-                    //Brush pixelBrush = new SolidBrush(Color.FromArgb((int)(Tracer.CollisionBuffer[x, y].Face.color.R * brushIntensity), (int)(Tracer.CollisionBuffer[x, y].Face.color.G * brushIntensity), (int)(Tracer.CollisionBuffer[x, y].Face.color.B * brushIntensity)));
+                    const int MIN_RGB = (int)(MINBRIGHTNESS * 255);
+                    Brush pixelBrush = new SolidBrush(Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
                     g.FillRectangle(pixelBrush, x, y, 1, 1);
 
                 }

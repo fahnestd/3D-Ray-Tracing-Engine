@@ -63,7 +63,7 @@ namespace Viewer
         public static Scene PawnOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/pawn.obj");
+            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/spaceship.obj");
             if (mesh != null)
             {
                 scene.AddMesh(mesh);
