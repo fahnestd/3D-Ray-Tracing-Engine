@@ -71,8 +71,12 @@ namespace Engine.Tracers
                     // Check if collision is closer than the last closest collision and set face as collision face if so.
                     if (collision.Distance > intersectionDistance)
                     {
+                        collision.Ray = ray.Direction;
                         collision.DidCollide = true;
                         collision.Face = face;
+                        collision.Color = collision.Face.color * collision.Face.lightness;
+                        collision.CollisionNormal = normal;
+                        collision.CollisionPoint = intersectionPoint;
                         collision.Distance = intersectionDistance;
                     }
                 }
@@ -82,8 +86,8 @@ namespace Engine.Tracers
             {
                 return collision;
             }
-            collision.DidCollide = false;
 
+            collision.DidCollide = false;
             return collision;
         }
         protected static bool InsideOutsideEdgeTest(Vector3 v1, Vector3 v2, Vector3 intersectionPoint, Vector3 normal)

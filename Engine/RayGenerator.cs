@@ -46,7 +46,7 @@ namespace Engine
             return rays;
         }
 
-        // Handles actually creating the 
+        // Handles creating the ray for a given x, y pixel
         private Ray GenerateRayForPixel(int x, int y)
         {
             // center the coordinates

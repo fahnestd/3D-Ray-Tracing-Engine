@@ -21,7 +21,8 @@ typedef struct {
     bool DidCollide;
 } Collision;
 
-// Helper function for inside-outside test
+// Helper function for insid
+// outside test
 bool insideOutsideEdgeTest(float3 v1, float3 v0, float3 point, float3 normal) {
     float3 edge = v1 - v0;
     float3 vp = point - v0;
