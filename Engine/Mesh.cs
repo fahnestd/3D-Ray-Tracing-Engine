@@ -1,4 +1,5 @@
 using Engine.BVH;
+using System.Globalization;
 using System.Numerics;
 
 namespace Engine
@@ -8,7 +9,7 @@ namespace Engine
     public class Mesh() {
         public Vector3 Position { get; set; } = Vector3.Zero;
         public List<Face> Faces = [];
-        public List<Vector3> Vertices { get; } = [];
+        public List<Vector3> Vertices { get; private set; } = [];
         public List<Vector3> Normals { get; } = [];
 
         public Scene Scene { get; set; }
@@ -86,6 +87,53 @@ namespace Engine
         {
             BVH.BVH bvh = new BVH.BVH(this);
             BVHTree = bvh.Root;
+        }
+
+        public void Scale(float Amount)
+        {
+            for (int i = 0; i < Vertices.Count; i++)
+            {
+                Vertices[i] *= Amount;
+            }
+        }
+
+        public void Transform(Vector3 Amount)
+        {
+            for (int i = 0; i < Vertices.Count; i++)
+            {
+                Vertices[i] += Amount;
+            }
+
+        }
+
+        public void TransformX(float Amount)
+        {
+            List<Vector3> NewVertices = [];
+            foreach (var Vertex in Vertices) 
+            {
+                NewVertices.Add(new Vector3(Vertex.X + Amount, Vertex.Y, Vertex.Z));
+            }
+            Vertices = NewVertices;
+        }
+
+        public void TransformY(float Amount)
+        {
+            List<Vector3> NewVertices = [];
+            foreach (var Vertex in Vertices)
+            {
+                NewVertices.Add(new Vector3(Vertex.X, Vertex.Y + Amount, Vertex.Z));
+            }
+            Vertices = NewVertices;
+        }
+
+        public void TransformZ(float Amount)
+        {
+            List<Vector3> NewVertices = [];
+            foreach (var Vertex in Vertices)
+            {
+                NewVertices.Add(new Vector3(Vertex.X, Vertex.Y, Vertex.Z + Amount));
+            }
+            Vertices = NewVertices;
         }
     }
 }

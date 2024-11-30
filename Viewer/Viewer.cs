@@ -51,7 +51,7 @@ namespace Viewer
         private void Form1_Load(object sender, EventArgs e)
         {
             // Create a new Scene and load in a sample
-            scene = SampleScenes.PawnOBJ();
+            scene = SampleScenes.TeapotOBJ();
             // Create a new camera facing the positive Z direction
             Camera camera = new Camera(new Vector3(0,0,-10), Vector3.UnitZ, Vector3.UnitY, 60.0f);
             scene.AddCamera(camera);

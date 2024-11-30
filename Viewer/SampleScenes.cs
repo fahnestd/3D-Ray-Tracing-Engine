@@ -63,9 +63,30 @@ namespace Viewer
         public static Scene PawnOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/spaceship.obj");
+            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/pawn.obj");
             if (mesh != null)
             {
+                mesh.Scale(.5f);
+                scene.AddMesh(mesh);
+            }
+
+            Light light1 = new Light();
+            light1.Position = new Vector3(0, 15, 0);
+            light1.Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1));
+
+            scene.AddLight(light1);
+
+            return scene;
+        }
+        public static Scene TeapotOBJ()
+        {
+            Scene scene = new Scene();
+            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/teapot.obj");
+            if (mesh != null)
+            {
+                mesh.Scale(2f);
+                //mesh.TransformX(-1.5f);
+                mesh.TransformY(-2.5f);
                 scene.AddMesh(mesh);
             }
 
