@@ -1,6 +1,7 @@
-﻿using System.Numerics;
+﻿using Engine.Components;
+using System.Numerics;
 
-namespace Engine
+namespace Engine.Util
 {
     public class RayGenerator
     {
@@ -22,7 +23,7 @@ namespace Engine
             _right = Vector3.Normalize(Vector3.Cross(_camera.Direction, _camera.Up));
             _up = Vector3.Normalize(Vector3.Cross(_right, _camera.Direction));
 
-            float aspectRatio = (float)width / (float)height;
+            float aspectRatio = width / (float)height;
 
             // https://www.edmundoptics.com/knowledge-center/application-notes/imaging/understanding-focal-length-and-field-of-view/
             // Camera FOV will be the vertical field of view. We can use this to calculate the view height using 2tan(FOV/2)
@@ -58,9 +59,9 @@ namespace Engine
             float normalizedY = pixelCenterY / _height;
 
             // convert to [-1,1] space so that [0,0] is centered.
-            float ndcX = (2.0f * normalizedX - 1.0f);
+            float ndcX = 2.0f * normalizedX - 1.0f;
             // for y we subtract instead since y starts at top and moves downwards.
-            float ndcY = (1.0f - 2.0f * normalizedY);
+            float ndcY = 1.0f - 2.0f * normalizedY;
 
             // Now we can scale them to the view width and height
             float worldX = ndcX * _viewWidth / 2.0f;  // Half width because NDCX is -1 to +1

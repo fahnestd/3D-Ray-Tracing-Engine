@@ -1,12 +1,13 @@
 using Engine.BVH;
-using System.Globalization;
+using Engine.Util;
 using System.Numerics;
 
-namespace Engine
+namespace Engine.Components
 {
-   
 
-    public class Mesh() {
+
+    public class Mesh()
+    {
         public Vector3 Position { get; set; } = Vector3.Zero;
         public List<Face> Faces = [];
         public List<Vector3> Vertices { get; private set; } = [];
@@ -16,7 +17,7 @@ namespace Engine
 
         public Mode FaceMode { get; set; } = Mode.TRIANGLE_STRIPS;
         public BVHNode BVHTree { get; set; }
-        public float reflectivity { get; set; } = 0f;
+        public float Reflectivity { get; set; } = 0f;
 
 
         public enum Mode
@@ -27,7 +28,8 @@ namespace Engine
         }
 
         // for vertex 3 and greater, we start performing a line strip, so the last 2 vertices are connected to the new one.
-        public void AddVertex(float x, float y, float z) { 
+        public void AddVertex(float x, float y, float z)
+        {
             Vertices.Add(new Vector3(x, y, z));
 
             switch (FaceMode)
@@ -46,10 +48,12 @@ namespace Engine
             // Start creating a triangle strip
             if (Vertices.Count > 2)
             {
-                Face face = new Face(this);
-                face.Vertex1 = Vertices.Count - 3;
-                face.Vertex2 = Vertices.Count - 2;
-                face.Vertex3 = Vertices.Count - 1;
+                Face face = new Face(this)
+                {
+                    Vertex1 = Vertices.Count - 3,
+                    Vertex2 = Vertices.Count - 2,
+                    Vertex3 = Vertices.Count - 1
+                };
                 Faces.Add(face);
             }
         }
@@ -59,10 +63,12 @@ namespace Engine
             // Start creating a triangle fan
             if (Vertices.Count > 2)
             {
-                Face face = new Face(this);
-                face.Vertex1 = 0;
-                face.Vertex2 = Vertices.Count - 2;
-                face.Vertex3 = Vertices.Count - 1;
+                Face face = new Face(this)
+                {
+                    Vertex1 = 0,
+                    Vertex2 = Vertices.Count - 2,
+                    Vertex3 = Vertices.Count - 1
+                };
                 Faces.Add(face);
             }
         }
@@ -110,7 +116,7 @@ namespace Engine
         public void TransformX(float Amount)
         {
             List<Vector3> NewVertices = [];
-            foreach (var Vertex in Vertices) 
+            foreach (var Vertex in Vertices)
             {
                 NewVertices.Add(new Vector3(Vertex.X + Amount, Vertex.Y, Vertex.Z));
             }
@@ -137,7 +143,7 @@ namespace Engine
             Vertices = NewVertices;
         }
 
-        public void setColor(PixelColor Color)
+        public void SetColor(PixelColor Color)
         {
             List<Face> NewFaces = [];
             foreach (var Face in Faces)

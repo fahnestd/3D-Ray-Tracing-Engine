@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using Engine.Components;
+using Engine.Util;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Engine.Tracers
 {
@@ -17,7 +12,7 @@ namespace Engine.Tracers
         public int Width { get; set; } = 640;
         public int Height { get; set; } = 480;
         public Scene Scene { get; set; } = scene;
-        public Collision[,] CollisionBuffer {  get; set; }
+        public Collision[,] ?CollisionBuffer {  get; set; }
 
         public abstract Collision RayTrace(Ray ray);
 
@@ -70,14 +65,20 @@ namespace Engine.Tracers
 
         public void LayerReflect()
         {
+            if (CollisionBuffer == null)
+            {
+                return;
+            }
             Parallel.For(0, Width, x =>
             {
                 for (int y = 0; y < Height; y++)
                 {
                     if (CollisionBuffer[x, y].DidCollide)
                     {
-                        Ray ray = new Ray();
-                        ray.Direction = CollisionBuffer[x, y].getIncidentVector();
+                        Ray ray = new Ray
+                        {
+                            Direction = CollisionBuffer[x, y].GetReflectionVector()
+                        };
 
                         // https://stackoverflow.com/questions/41211892/ray-tracer-artifacts-with-reflection
                         // I was seeing specs across the model, and found this article about it being due to limited precision making some points reflect the back of the current face.
@@ -87,7 +88,7 @@ namespace Engine.Tracers
                         Collision collision = RayTrace(ray);
                         if (collision.DidCollide)
                         {
-                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, CollisionBuffer[x, y].Face.Mesh.reflectivity);
+                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, CollisionBuffer[x, y].Face.Mesh.Reflectivity);
                         }
                     }
                 }

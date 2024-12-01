@@ -1,7 +1,7 @@
 
 using System.Numerics;
 
-namespace Engine
+namespace Engine.Components
 {
     public class Camera
     (
