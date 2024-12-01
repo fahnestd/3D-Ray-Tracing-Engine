@@ -45,9 +45,32 @@ namespace Engine.Tracers
             return CollisionBuffer;
         }
 
+        public Collision[,] GetCollisionBufferParallel()
+        {
+            // Create a new RayGenerator and specify the camera, height, and width in pixels
+            RayGenerator rayGenerator = new RayGenerator(scene.Cameras[Scene.ActiveCamera], Width, Height);
+
+            // Generate rays for the scene
+            Ray[,] rays = rayGenerator.GenerateRays();
+
+            // Loop through pixels and store collisions
+            Collision[,] collisionBuffer = new Collision[Width, Height];
+            Parallel.For(0, Width, x =>
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    collisionBuffer[x, y] = RayTrace(rays[x, y]);
+                }
+            });
+           
+            CollisionBuffer = collisionBuffer;
+            LayerReflect();
+            return CollisionBuffer;
+        }
+
         public void LayerReflect()
         {
-            for (int x = 0; x < Width; x++)
+            Parallel.For(0, Width, x =>
             {
                 for (int y = 0; y < Height; y++)
                 {
@@ -68,8 +91,7 @@ namespace Engine.Tracers
                         }
                     }
                 }
-            }
-
+            });
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Engine.BVH
     public class BVH
     {
 
-        const int MaxDepth = 20;
+        const int MaxDepth = 50;
         const int FacesThreshold = 1;
 
         public BVHNode Root;

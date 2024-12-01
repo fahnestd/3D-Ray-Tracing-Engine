@@ -51,7 +51,7 @@ namespace Engine
                                 face.Vertex1 = int.Parse(v1[0]) - 1;
                                 face.Vertex2 = int.Parse(v2[0]) - 1;
                                 face.Vertex3 = int.Parse(v3[0]) - 1;
-
+                               
                                 face.SetFaceNormal(
                                     mesh.Normals[int.Parse(v1[2]) - 1],
                                     mesh.Normals[int.Parse(v2[2]) - 1],
@@ -59,8 +59,6 @@ namespace Engine
                                 );
 
                                 mesh.Faces.Add(face);
-                                break;
-
                             }
                             else
                             {
@@ -71,8 +69,9 @@ namespace Engine
                                 face.Vertex3 = int.Parse(parts[3]) - 1;
 
                                 mesh.Faces.Add(face);
-                                break;
+                                
                             }
+                            break;
                     }
                 }
                 return mesh;

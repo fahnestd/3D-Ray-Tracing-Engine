@@ -58,10 +58,9 @@ namespace Viewer
 
             // Calculates lighting for the scene
             scene.Bake();
-
             Tracer = new BVHTracer(scene);
             var sw = Stopwatch.StartNew();
-            Tracer.GetCollisionBuffer();
+            Tracer.GetCollisionBufferParallel();
             sw.Stop();
             Debug.WriteLine($"Successfully traced scene in {sw.ElapsedMilliseconds} ms");
 

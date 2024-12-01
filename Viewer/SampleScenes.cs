@@ -89,11 +89,12 @@ namespace Viewer
                 scene.AddMesh(mesh);
             }
 
+            // Import a square object and set reflectivity to 100% like a mirror
             Mesh? mesh2 = Import.fromObjectFile("../../../assets/obj/teapot-reflection.obj");
             if (mesh2 != null)
             {
-                mesh2.reflectivity = 1f;
                 mesh2.setColor(PixelColor.FromRGB(50, 50, 100));
+                mesh2.reflectivity = 1f;
                 scene.AddMesh(mesh2);
             }
 
