@@ -1,11 +1,12 @@
 ﻿
+using Engine.Components;
 using System.Numerics;
 
-namespace Engine
+namespace Engine.Util
 {
     public class Face
     (
-        Mesh mesh    
+        Mesh mesh
     )
     {
         public int Vertex1;
@@ -21,7 +22,7 @@ namespace Engine
 
         public void SetNormal(Vector3 normal)
         {
-           Normal = normal;
+            Normal = normal;
         }
 
         /**
@@ -37,7 +38,7 @@ namespace Engine
         {
             lightness += Vector3.Dot(Normal, light.Direction);
         }
-       
+
         public Vector3 Center
         {
             get { return (Mesh.Vertices[Vertex1] + Mesh.Vertices[Vertex2] + Mesh.Vertices[Vertex3]) / 3; }

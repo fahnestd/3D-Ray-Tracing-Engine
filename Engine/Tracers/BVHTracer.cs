@@ -1,7 +1,7 @@
 using Engine.BVH;
-using System.Collections.ObjectModel;
+using Engine.Components;
+using Engine.Util;
 using System.Numerics;
-using System.Runtime.Intrinsics;
 
 namespace Engine.Tracers
 {
@@ -13,7 +13,7 @@ namespace Engine.Tracers
         {
 
             /**
-             * Source for tracing algorithm inspriration
+             * Source for tracing algorithm inspiration
              * https://courses.cs.washington.edu/courses/csep557/09sp/lectures/triangle_intersection.pdf
              */
             Collision collision = new Collision();
@@ -67,7 +67,7 @@ namespace Engine.Tracers
                 float planeDistance = -Vector3.Dot(normal, v0);
                 float rayDirectionDotNormal = Vector3.Dot(normal, ray.Direction);
 
-                // If the ray is parallel or close to, we skip it and assume it doesnt hit
+                // If the ray is parallel or close to, we skip it and assume it doesn't hit
                 if (Math.Abs(rayDirectionDotNormal) < 1e-7) // Ray is parallel to the plane
                     continue;
 

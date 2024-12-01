@@ -1,7 +1,6 @@
-using Engine;
+using Engine.Components;
 using Engine.Tracers;
 using System.Diagnostics;
-using System.Globalization;
 using System.Numerics;
 
 namespace Viewer
@@ -11,9 +10,6 @@ namespace Viewer
         private Scene ?scene;
 
         private Tracer ?Tracer;
-
-
-        private const int MAXVIEWDISTANCE = 25;
 
         private const float MINBRIGHTNESS = 0.05f;
 
@@ -38,7 +34,6 @@ namespace Viewer
                     }
 
                     // Draw a 1x1 rectangle for each pixel
-                    float brushIntensity = Math.Max(MINBRIGHTNESS, Tracer.CollisionBuffer[x, y].Face.lightness);
                     const int MIN_RGB = (int)(MINBRIGHTNESS * 255);
                     Brush pixelBrush = new SolidBrush(Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
                     g.FillRectangle(pixelBrush, x, y, 1, 1);

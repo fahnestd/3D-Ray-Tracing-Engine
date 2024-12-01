@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Engine
+namespace Engine.Util
 {
     public record Collision
     {
@@ -12,9 +12,9 @@ namespace Engine
         public Face Face { get; set; }
         public PixelColor Color { get; set; } = PixelColor.FromRGB(0, 0, 0);
 
-        public Vector3 getIncidentVector()
+        public Vector3 GetReflectionVector()
         {
-            Vector3 reflectionVector = Ray - (2 * Vector3.Dot(Ray, CollisionNormal)/ Vector3.Dot(CollisionNormal, CollisionNormal) * CollisionNormal);
+            Vector3 reflectionVector = Ray - 2 * Vector3.Dot(Ray, CollisionNormal) / Vector3.Dot(CollisionNormal, CollisionNormal) * CollisionNormal;
             return reflectionVector;
         }
     }

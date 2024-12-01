@@ -1,6 +1,7 @@
-using System.Numerics;
-using Engine;
+using Engine.Components;
 using Engine.Tracers;
+using Engine.Util;
+using System.Numerics;
 
 namespace Testing
 {
@@ -27,7 +28,8 @@ namespace Testing
             Ray ray1 = new Ray();
             ray1.Origin = new Vector3(0.2f, 0.2f, 1);
             ray1.Direction = new Vector3(0, 0, -1);
-            Collision intersected1 = StandardTracer.RayTrace(ray1);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected1 = tracer.RayTrace(ray1);
             scene.RemoveMesh(mesh1);
 
             Assert.IsTrue(intersected1.DidCollide);
@@ -46,7 +48,8 @@ namespace Testing
             Ray ray2 = new Ray();
             ray2.Origin = new Vector3(5, 5, 5);
             ray2.Direction = new Vector3(1, 0, 0);
-            Collision intersected2 = StandardTracer.RayTrace(scene, ray2);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected2 = tracer.RayTrace(ray2);
             scene.RemoveMesh(mesh2);
 
             Assert.IsFalse(intersected2.DidCollide);
@@ -64,7 +67,8 @@ namespace Testing
             Ray ray3 = new Ray();
             ray3.Origin = new Vector3(0, 0, 1);
             ray3.Direction = new Vector3(1, 0, 0);
-            Collision intersected3 = StandardTracer.RayTrace(scene, ray3);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected3 = tracer.RayTrace(ray3);
             scene.RemoveMesh(mesh3);
 
             Assert.IsFalse(intersected3.DidCollide);
@@ -82,7 +86,8 @@ namespace Testing
             Ray ray4 = new Ray();
             ray4.Origin = new Vector3(0, 0, 1);
             ray4.Direction = new Vector3(0, 0, -1);
-            Collision intersected4 = StandardTracer.RayTrace(scene, ray4);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected4 = tracer.RayTrace(ray4);
             scene.RemoveMesh(mesh4);
 
             Assert.IsTrue(intersected4.DidCollide);
@@ -100,7 +105,8 @@ namespace Testing
             Ray ray5 = new Ray();
             ray5.Origin = new Vector3(0, 0, 1);
             ray5.Direction = new Vector3(0, 0, -1);
-            Collision intersected5 = StandardTracer.RayTrace(scene, ray5);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected5 = tracer.RayTrace(ray5);
             scene.RemoveMesh(mesh5);
 
             Assert.IsTrue(intersected5.DidCollide);
@@ -118,7 +124,8 @@ namespace Testing
             Ray ray6 = new Ray();
             ray6.Origin = new Vector3(0, 0, 0);
             ray6.Direction = new Vector3(0, 0, 1);
-            Collision intersected6 = StandardTracer.RayTrace(scene, ray6);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected6 = tracer.RayTrace(ray6);
             scene.RemoveMesh(mesh6);
 
             Assert.IsTrue(intersected6.DidCollide);
@@ -136,7 +143,8 @@ namespace Testing
             Ray ray7 = new Ray();
             ray7.Origin = new Vector3(0, 0, 0);
             ray7.Direction = new Vector3(0.1f, 0.1f, 1);
-            Collision intersected7 = StandardTracer.RayTrace(scene, ray7);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected7 = tracer.RayTrace(ray7);
             scene.RemoveMesh(mesh7);
             
             Assert.IsTrue(intersected7.DidCollide);
@@ -154,7 +162,8 @@ namespace Testing
             Ray ray8 = new Ray();
             ray8.Origin = new Vector3(1.1f, 1.1f, 1);
             ray8.Direction = new Vector3(0, 0, -1);
-            Collision intersected8 = StandardTracer.RayTrace(scene, ray8);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected8 = tracer.RayTrace(ray8);
             scene.RemoveMesh(mesh8);
 
             Assert.IsFalse(intersected8.DidCollide);
@@ -172,7 +181,8 @@ namespace Testing
             Ray ray9 = new Ray();
             ray9.Origin = new Vector3(0.0005f, 0.0005f, 1);
             ray9.Direction = new Vector3(0, 0, -1);
-            Collision intersected9 = StandardTracer.RayTrace(scene, ray9);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected9 = tracer.RayTrace(ray9);
             scene.RemoveMesh(mesh9);
 
             Assert.IsTrue(intersected9.DidCollide);
@@ -190,7 +200,8 @@ namespace Testing
             Ray ray10 = new Ray();
             ray10.Origin = new Vector3(0, 0, -1);
             ray10.Direction = new Vector3(0, 0, 1);
-            Collision intersected10 = StandardTracer.RayTrace(scene, ray10);
+            Tracer tracer = new StandardTracer(scene);
+            Collision intersected10 = tracer.RayTrace(ray10);
             scene.RemoveMesh(mesh10);
 
             Assert.IsTrue(intersected10.DidCollide);

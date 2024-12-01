@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Engine
+namespace Engine.Util
 {
     public record Ray
     {

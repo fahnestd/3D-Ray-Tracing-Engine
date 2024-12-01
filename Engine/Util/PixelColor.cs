@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Engine
+namespace Engine.Util
 {
     public class PixelColor
     {

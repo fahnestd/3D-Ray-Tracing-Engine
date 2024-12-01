@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
+using Engine.Util;
 using System.Diagnostics;
 using System.Numerics;
 
-namespace Engine
+namespace Engine.Components
 {
     public class Scene
     {
         public List<Mesh> Meshes { get; } = [];
         public List<Face> Faces { get; } = [];
         public List<Light> Lights { get; } = [];
-        public List<Camera> Cameras { get; private set; } = [new Camera(Vector3.Zero, Vector3.UnitX,Vector3.UnitY, 60)];
+        public List<Camera> Cameras { get; private set; } = [new Camera(Vector3.Zero, Vector3.UnitX, Vector3.UnitY, 60)];
         public int ActiveCamera { get; set; } = 0;
 
         public void AddMesh(Mesh mesh)

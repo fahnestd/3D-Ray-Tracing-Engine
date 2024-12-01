@@ -1,10 +1,6 @@
-﻿using Engine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Engine.Components;
+using Engine.Util;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Viewer
 {
@@ -15,10 +11,9 @@ namespace Viewer
             Scene scene = new Scene();
 
             //A basic square shape tilted towards the screen
-            Mesh mesh1 = new Mesh();
-
             Face.CurrentColor = PixelColor.FromRGB(255, 0, 0);
 
+            Mesh mesh1 = new Mesh();
             mesh1.AddVertex(2, 2, 6);
             mesh1.AddVertex(-2, 2, 6);
             mesh1.AddVertex(2, -2, 2);
@@ -26,10 +21,9 @@ namespace Viewer
             mesh1.CalculateNormalsFromVertices();
 
             // A basic square shape laying flat, cutting through mesh1
-            Mesh mesh2 = new Mesh();
-
             Face.CurrentColor = PixelColor.FromRGB(0, 255, 0);
 
+            Mesh mesh2 = new Mesh();
             mesh2.AddVertex(2, 2, 4);
             mesh2.AddVertex(-2, 2, 4);
             mesh2.AddVertex(2, -2, 4);
@@ -38,22 +32,22 @@ namespace Viewer
 
 
             Mesh mesh3 = new Mesh();
-
             mesh3.AddVertex(2, -2, 2);
             mesh3.AddVertex(2, -2, -2);
             mesh3.AddVertex(-2, -2, 2);
             mesh3.AddVertex(-2, -2, -2);
             mesh3.CalculateNormalsFromVertices();
 
-
             // Add the mesh to the scene
             scene.AddMesh(mesh1);
             scene.AddMesh(mesh2);
             scene.AddMesh(mesh3);
 
-            Light light1 = new Light();
-            light1.Position = new Vector3(0, 15, 0);
-            light1.Direction = Vector3.Normalize(new Vector3(0, 1, -1));
+            Light light1 = new Light
+            {
+                Position = new Vector3(0, 15, 0),
+                Direction = Vector3.Normalize(new Vector3(0, 1, -1))
+            };
 
             scene.AddLight(light1);
 
@@ -63,16 +57,18 @@ namespace Viewer
         public static Scene PawnOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/pawn.obj");
+            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/pawn.obj");
             if (mesh != null)
             {
                 mesh.Scale(.5f);
                 scene.AddMesh(mesh);
             }
 
-            Light light1 = new Light();
-            light1.Position = new Vector3(0, 15, 0);
-            light1.Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1));
+            Light light1 = new Light
+            {
+                Position = new Vector3(0, 15, 0),
+                Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1))
+            };
 
             scene.AddLight(light1);
 
@@ -81,32 +77,36 @@ namespace Viewer
         public static Scene TeapotOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.fromObjectFile("../../../assets/obj/teapot.obj");
+            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/teapot.obj");
             if (mesh != null)
             {
-                mesh.setColor(PixelColor.FromRGB(255, 0, 0));
-                mesh.reflectivity = .3f;
+                mesh.SetColor(PixelColor.FromRGB(255, 0, 0));
+                mesh.Reflectivity = .3f;
                 scene.AddMesh(mesh);
             }
 
             // Import a square object and set reflectivity to 100% like a mirror
-            Mesh? mesh2 = Import.fromObjectFile("../../../assets/obj/teapot-reflection.obj");
+            Mesh? mesh2 = Import.FromObjectFile("../../../assets/obj/teapot-reflection.obj");
             if (mesh2 != null)
             {
-                mesh2.setColor(PixelColor.FromRGB(50, 50, 100));
-                mesh2.reflectivity = 1f;
+                mesh2.SetColor(PixelColor.FromRGB(50, 50, 100));
+                mesh2.Reflectivity = 1f;
                 scene.AddMesh(mesh2);
             }
 
-            Light light1 = new Light();
-            light1.Position = new Vector3(0, 15, 0);
-            light1.Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1));
+            Light light1 = new Light
+            {
+                Position = new Vector3(0, 15, 0),
+                Direction = Vector3.Normalize(new Vector3(0.5f, 1, -1))
+            };
 
             scene.AddLight(light1);
 
-            Light light2 = new Light();
-            light2.Position = new Vector3(0, -15, 0);
-            light2.Direction = Vector3.Normalize(new Vector3(-0.5f, 1, 1));
+            Light light2 = new Light
+            {
+                Position = new Vector3(0, -15, 0),
+                Direction = Vector3.Normalize(new Vector3(-0.5f, 1, 1))
+            };
 
             scene.AddLight(light2);
 
