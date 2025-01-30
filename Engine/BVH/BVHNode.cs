@@ -9,7 +9,7 @@ namespace Engine.BVH
     {
         public BoundingBox BoundingBox = boundingBox;
         public List<Face> Faces = [];
-        public BVHNode ChildA;
-        public BVHNode ChildB;
+        public BVHNode ?ChildA;
+        public BVHNode ?ChildB;
     }
 }

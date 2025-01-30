@@ -11,7 +11,7 @@ namespace Engine.BVH
     {
         public Vector3 Min = Vector3.One * float.PositiveInfinity;
         public Vector3 Max = Vector3.One * float.NegativeInfinity;
-        public Mesh Mesh { get; set; } = mesh;
+      
 
         public Vector3 GetCenter()
         {

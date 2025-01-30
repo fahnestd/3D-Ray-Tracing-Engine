@@ -7,20 +7,18 @@ namespace Engine.Tracers
 {
     public class BVHTracer(Scene scene) : Tracer(scene)
     {
-
-        // BVH referenced from source https://jacco.ompf2.com/2022/04/13/how-to-build-a-bvh-part-1-basics/
         public override Collision RayTrace(Ray ray)
         {
-
-            /**
-             * Source for tracing algorithm inspiration
-             * https://courses.cs.washington.edu/courses/csep557/09sp/lectures/triangle_intersection.pdf
-             */
             Collision collision = new Collision();
             collision.Distance = float.PositiveInfinity;
 
             foreach (Mesh mesh in scene.Meshes)
             {
+                if (mesh.BVHTree == null)
+                {
+                    Console.Error.WriteLine("Error running BVHTracer, BVHTree missing from mesh");
+                    continue;
+                }
                 BVHTreeTest(ref collision, ray, mesh, mesh.BVHTree);
             }
             if (collision.DidCollide)
@@ -86,20 +84,8 @@ namespace Engine.Tracers
 
                 Vector3 intersectionPoint = ray.Origin + intersectionDistance * ray.Direction;
 
-                // Edge 1
-                if (InsideOutsideEdgeTest(v1, v0, intersectionPoint, normal))
-                {
-                    continue;
-                }
-
-                // Edge 2
-                if (InsideOutsideEdgeTest(v2, v1, intersectionPoint, normal))
-                {
-                    continue;
-                }
-
-                // Edge 3
-                if (InsideOutsideEdgeTest(v0, v2, intersectionPoint, normal))
+                // Test Each Edge
+                if (InsideOutsideEdgeTest(v1, v0, intersectionPoint, normal) || InsideOutsideEdgeTest(v2, v1, intersectionPoint, normal) || InsideOutsideEdgeTest(v0, v2, intersectionPoint, normal))
                 {
                     continue;
                 }
@@ -127,7 +113,6 @@ namespace Engine.Tracers
             return Vector3.Dot(normal, crossProduct) < 0;
         }
 
-        // Algorithm reference https://tavianator.com/2011/ray_box.html
         // This provides quick bounds checking for the BVH nodes
         protected static bool BoundsHit(Ray ray, BoundingBox boundingBox)
         {

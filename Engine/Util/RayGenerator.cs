@@ -19,13 +19,12 @@ namespace Engine.Util
             _width = width;
             _height = height;
 
-            // Calculating vectors that are right and up from camera for east coordinate manipulation later. camera direction is already forwards.
+            // Calculating vectors that are right and up from camera for east coordinate manipulation later.
             _right = Vector3.Normalize(Vector3.Cross(_camera.Direction, _camera.Up));
             _up = Vector3.Normalize(Vector3.Cross(_right, _camera.Direction));
 
             float aspectRatio = width / (float)height;
 
-            // https://www.edmundoptics.com/knowledge-center/application-notes/imaging/understanding-focal-length-and-field-of-view/
             // Camera FOV will be the vertical field of view. We can use this to calculate the view height using 2tan(FOV/2)
             _viewHeight = 2.0f * MathF.Tan(Common.ToRadians(_camera.FieldOfView) / 2.0f);
             _viewWidth = _viewHeight * aspectRatio;
@@ -47,7 +46,7 @@ namespace Engine.Util
             return rays;
         }
 
-        // Handles creating the ray for a given x, y pixel
+        // Create a ray for a given x, y pixel
         private Ray GenerateRayForPixel(int x, int y)
         {
             // center the coordinates
@@ -68,9 +67,7 @@ namespace Engine.Util
             float worldY = ndcY * _viewHeight / 2.0f; // Half height because NDCY is -1 to +1
 
             // Calculate the point on the view plane (the view plane is one unit away from the camera)
-            Vector3 pointOnPlane = _camera.Direction +
-                                 worldX * _right +
-                                 worldY * _up;
+            Vector3 pointOnPlane = _camera.Direction + worldX * _right + worldY * _up;
 
             Ray ray = new Ray()
             {

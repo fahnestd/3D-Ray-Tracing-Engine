@@ -4,15 +4,13 @@ namespace Engine.BVH
 {
     public class BVH
     {
-
         const int MaxDepth = 50;
-        const int FacesThreshold = 1;
+        const int FacesThreshold = 3;
 
         public BVHNode Root;
 
         public BVH(Mesh mesh)
         {
-
             BoundingBox BoundingBox = new BoundingBox(mesh);
 
             foreach (var vertex in mesh.Vertices)
@@ -25,9 +23,9 @@ namespace Engine.BVH
             Split(Root, mesh);
         }
 
-        public void Split (BVHNode node, Mesh mesh, int depth = 1)
+        public static void Split(BVHNode node, Mesh mesh, int depth = 1)
         {
-            // Stop iterating at max depth
+            // Stop recursion at max depth
             if (depth >= MaxDepth || node.Faces.Count < FacesThreshold)
             {
                 return;
@@ -37,7 +35,7 @@ namespace Engine.BVH
             node.ChildA = new BVHNode(new BoundingBox(mesh));
             node.ChildB = new BVHNode(new BoundingBox(mesh));
 
-            // Go through each vertex in the current node and distribute it between the two child nodes.
+            // Go through each vertex in the current node and distribute its faces between the two child nodes.
             foreach (var face in node.Faces)
             {
                 bool inChildA = face.Center.X < node.BoundingBox.GetCenter().X;
@@ -47,7 +45,6 @@ namespace Engine.BVH
                 child.BoundingBox.Expand(face);
             }
 
-            // recurse to the child nodes
             Split(node.ChildA, mesh, depth + 1);
             Split(node.ChildB, mesh, depth + 1);
         }

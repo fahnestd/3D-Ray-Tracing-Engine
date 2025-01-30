@@ -52,10 +52,10 @@ namespace Viewer
             scene.AddCamera(camera);
 
             // Calculates lighting for the scene
-            scene.Bake();
+            scene.PreCalculateLighting();
             Tracer = new BVHTracer(scene);
             var sw = Stopwatch.StartNew();
-            Tracer.GetCollisionBufferParallel();
+            Tracer.GetCollisionBuffer();
             sw.Stop();
             Debug.WriteLine($"Successfully traced scene in {sw.ElapsedMilliseconds} ms");
 

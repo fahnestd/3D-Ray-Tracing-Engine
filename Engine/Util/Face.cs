@@ -43,5 +43,15 @@ namespace Engine.Util
         {
             get { return (Mesh.Vertices[Vertex1] + Mesh.Vertices[Vertex2] + Mesh.Vertices[Vertex3]) / 3; }
         }
+
+        public Vector3 CalculateNormalFromVertices()
+        {
+            Vector3 U = Mesh.Vertices[Vertex2] - Mesh.Vertices[Vertex1];
+            Vector3 V = Mesh.Vertices[Vertex3] - Mesh.Vertices[Vertex1];
+            Vector3 Normal = Vector3.Cross(U, V);
+            Vector3 UnitNormal = Vector3.Normalize(Normal);
+            SetNormal(UnitNormal);
+            return UnitNormal;
+        }
     }
 }

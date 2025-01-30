@@ -4,8 +4,6 @@ using System.Numerics;
 
 namespace Engine.Components
 {
-
-
     public class Mesh()
     {
         public Vector3 Position { get; set; } = Vector3.Zero;
@@ -13,10 +11,10 @@ namespace Engine.Components
         public List<Vector3> Vertices { get; private set; } = [];
         public List<Vector3> Normals { get; } = [];
 
-        public Scene Scene { get; set; }
+        public Scene ?Scene { get; set; }
 
         public Mode FaceMode { get; set; } = Mode.TRIANGLE_STRIPS;
-        public BVHNode BVHTree { get; set; }
+        public BVHNode ?BVHTree { get; set; }
         public float Reflectivity { get; set; } = 0f;
 
 
@@ -27,7 +25,6 @@ namespace Engine.Components
             LOAD
         }
 
-        // for vertex 3 and greater, we start performing a line strip, so the last 2 vertices are connected to the new one.
         public void AddVertex(float x, float y, float z)
         {
             Vertices.Add(new Vector3(x, y, z));
@@ -45,7 +42,7 @@ namespace Engine.Components
 
         public void TriangleStrip()
         {
-            // Start creating a triangle strip
+            // For vertex 3 and greater, we start performing a triangle strip, so the last 2 vertices are connected to the new one to form the next triangle.
             if (Vertices.Count > 2)
             {
                 Face face = new Face(this)
@@ -60,7 +57,7 @@ namespace Engine.Components
 
         public void TriangleFan()
         {
-            // Start creating a triangle fan
+            // For vertex 3 and greater, we start performing a triangle fan, the first vertex is connected to the 2 newest vertices to form the next triangle.
             if (Vertices.Count > 2)
             {
                 Face face = new Face(this)
@@ -82,15 +79,11 @@ namespace Engine.Components
         {
             foreach (Face face in Faces)
             {
-                Vector3 U = Vertices[face.Vertex2] - Vertices[face.Vertex1];
-                Vector3 V = Vertices[face.Vertex3] - Vertices[face.Vertex1];
-                Vector3 Normal = Vector3.Cross(U, V);
-                Vector3 UnitNormal = Vector3.Normalize(Normal);
-                face.SetNormal(UnitNormal);
+                face.CalculateNormalFromVertices();
             }
         }
 
-        public void CalculateBoundingBox()
+        public void GenerateBVHTree()
         {
             BVH.BVH bvh = new BVH.BVH(this);
             BVHTree = bvh.Root;

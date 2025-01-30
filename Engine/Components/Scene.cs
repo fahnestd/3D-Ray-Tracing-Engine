@@ -14,10 +14,7 @@ namespace Engine.Components
 
         public void AddMesh(Mesh mesh)
         {
-            var sw = Stopwatch.StartNew();
-            mesh.CalculateBoundingBox();
-            sw.Stop();
-            Debug.WriteLine($"Successfully build BVH in {sw.ElapsedMilliseconds} ms");
+            mesh.GenerateBVHTree();
             Meshes.Add(mesh);
         }
 
@@ -36,7 +33,7 @@ namespace Engine.Components
             Lights.Remove(light);
         }
 
-        public void Bake()
+        public void PreCalculateLighting()
         {
             foreach (Mesh mesh in Meshes)
             {
@@ -59,7 +56,7 @@ namespace Engine.Components
                 ActiveCamera = Cameras.IndexOf(camera);
             }
         }
-
+        
         public void RemoveCamera(Camera camera)
         {
             if (Cameras.Count == 1)
@@ -68,6 +65,23 @@ namespace Engine.Components
                 return;
             }
             Cameras.Remove(camera);
+        }
+
+        public void SetActiveCamera(Camera camera)
+        {
+            var activeCamera = Cameras.IndexOf(camera);
+            if (activeCamera != -1)
+            {
+                ActiveCamera = activeCamera;
+            }
+        }
+
+        public void SetActiveCamera(int cameraIndex)
+        {
+            if (cameraIndex > 0 && cameraIndex < Cameras.Count)
+            {
+                ActiveCamera = cameraIndex;
+            }
         }
     }
 

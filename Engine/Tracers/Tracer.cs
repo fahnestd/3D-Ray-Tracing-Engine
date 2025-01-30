@@ -26,30 +26,6 @@ namespace Engine.Tracers
 
             // Loop through pixels and store collisions
             Collision[,] collisionBuffer = new Collision[Width, Height];
-            
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    collisionBuffer[x, y] = RayTrace(rays[x, y]);
-                }
-            }
-
-            CollisionBuffer = collisionBuffer;
-            LayerReflect();
-            return CollisionBuffer;
-        }
-
-        public Collision[,] GetCollisionBufferParallel()
-        {
-            // Create a new RayGenerator and specify the camera, height, and width in pixels
-            RayGenerator rayGenerator = new RayGenerator(scene.Cameras[Scene.ActiveCamera], Width, Height);
-
-            // Generate rays for the scene
-            Ray[,] rays = rayGenerator.GenerateRays();
-
-            // Loop through pixels and store collisions
-            Collision[,] collisionBuffer = new Collision[Width, Height];
             Parallel.For(0, Width, x =>
             {
                 for (int y = 0; y < Height; y++)
@@ -69,6 +45,7 @@ namespace Engine.Tracers
             {
                 return;
             }
+
             Parallel.For(0, Width, x =>
             {
                 for (int y = 0; y < Height; y++)
@@ -80,11 +57,10 @@ namespace Engine.Tracers
                             Direction = CollisionBuffer[x, y].GetReflectionVector()
                         };
 
-                        // https://stackoverflow.com/questions/41211892/ray-tracer-artifacts-with-reflection
-                        // I was seeing specs across the model, and found this article about it being due to limited precision making some points reflect the back of the current face.
-                        // Fix was to nudge the reflection origin slightly off the surface.
+                        // Nudge the reflection origin point slightly off the surface to remove flickering from slight inaccuracies in floating points.
                         Vector3 NudgedOrigin = CollisionBuffer[x, y].CollisionPoint + CollisionBuffer[x, y].CollisionNormal * (float)1e-5;
                         ray.Origin = NudgedOrigin;
+
                         Collision collision = RayTrace(ray);
                         if (collision.DidCollide)
                         {

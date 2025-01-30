@@ -8,10 +8,6 @@ namespace Engine.Tracers
     {
         public override Collision RayTrace(Ray ray)
         {
-            /**
-             * Source for tracing algorithm inspriration
-             * https://courses.cs.washington.edu/courses/csep557/09sp/lectures/triangle_intersection.pdf
-             */
             Collision collision = new Collision();
             collision.Distance = float.PositiveInfinity;
 
@@ -50,20 +46,8 @@ namespace Engine.Tracers
 
                     Vector3 intersectionPoint = ray.Origin + intersectionDistance * ray.Direction;
 
-                    // Edge 1
-                    if (InsideOutsideEdgeTest(v1, v0, intersectionPoint, normal))
-                    {
-                        continue;
-                    }
-
-                    // Edge 2
-                    if (InsideOutsideEdgeTest(v2, v1, intersectionPoint, normal))
-                    {
-                        continue;
-                    }
-
-                    // Edge 3
-                    if (InsideOutsideEdgeTest(v0, v2, intersectionPoint, normal))
+                    // Test Each Edge
+                    if (InsideOutsideEdgeTest(v1, v0, intersectionPoint, normal) || InsideOutsideEdgeTest(v2, v1, intersectionPoint, normal) || InsideOutsideEdgeTest(v0, v2, intersectionPoint, normal))
                     {
                         continue;
                     }
