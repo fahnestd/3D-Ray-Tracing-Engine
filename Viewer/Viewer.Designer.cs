@@ -36,6 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
+            DoubleBuffered = true;
             Name = "Viewer";
             Text = "3D Ray Tracing Engine Demo";
             Load += Form1_Load;

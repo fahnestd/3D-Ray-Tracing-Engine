@@ -22,8 +22,7 @@ namespace Viewer
         {
             if (Tracer == null || Tracer.CollisionBuffer == null) return;
 
-            Graphics g = e.Graphics;
-            
+            Bitmap bitmap = new Bitmap(Width, Height);
             for (int x = 0; x < Tracer.Width; x++)
             {
                 for (int y = 0; y < Tracer.Height; y++)
@@ -32,15 +31,12 @@ namespace Viewer
                     {
                         continue;
                     }
-
-                    // Draw a 1x1 rectangle for each pixel
                     const int MIN_RGB = (int)(MINBRIGHTNESS * 255);
                     Brush pixelBrush = new SolidBrush(Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
-                    g.FillRectangle(pixelBrush, x, y, 1, 1);
-
+                    bitmap.SetPixel(x, y, Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));  
                 }
             }
-            g.Flush();
+            e.Graphics.DrawImage(bitmap, new Point(0, 0));
         }
 
         private void Form1_Load(object sender, EventArgs e)
