@@ -14,7 +14,7 @@ namespace Engine.Util
 
         public Vector3 GetReflectionVector()
         {
-            Vector3 reflectionVector = Ray - 2 * Vector3.Dot(Ray, CollisionNormal) / Vector3.Dot(CollisionNormal, CollisionNormal) * CollisionNormal;
+            Vector3 reflectionVector = Ray - 2 * Vector3.Dot(Ray, CollisionNormal) * CollisionNormal;
             return reflectionVector;
         }
     }

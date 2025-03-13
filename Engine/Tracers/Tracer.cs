@@ -58,6 +58,10 @@ namespace Engine.Tracers
                         };
 
                         // Nudge the reflection origin point slightly off the surface to remove flickering from slight inaccuracies in floating points.
+                        if (Vector3.Dot(ray.Direction, CollisionBuffer[x, y].CollisionNormal) < 0)
+                        {
+                            CollisionBuffer[x, y].CollisionNormal = -CollisionBuffer[x, y].CollisionNormal;  // Flip the normal if needed
+                        }
                         Vector3 NudgedOrigin = CollisionBuffer[x, y].CollisionPoint + CollisionBuffer[x, y].CollisionNormal * (float)1e-5;
                         ray.Origin = NudgedOrigin;
 

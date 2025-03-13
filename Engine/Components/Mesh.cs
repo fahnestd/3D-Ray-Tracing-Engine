@@ -77,9 +77,11 @@ namespace Engine.Components
 
         public void CalculateNormalsFromVertices()
         {
+            bool inverse = false;
             foreach (Face face in Faces)
             {
-                face.CalculateNormalFromVertices();
+                face.CalculateNormalFromVertices(inverse);
+                inverse = !inverse;
             }
         }
 

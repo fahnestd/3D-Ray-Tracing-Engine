@@ -60,6 +60,25 @@ namespace Engine.Util
                                 );
 
                                 mesh.Faces.Add(face);
+
+                                if (parts.Length == 5)
+                                {
+                                    string[] v4 = parts[4].Split(['/']);
+                                    Face face2 = new Face(mesh)
+                                    {
+                                        Vertex1 = int.Parse(v1[0]) - 1,
+                                        Vertex2 = int.Parse(v3[0]) - 1,
+                                        Vertex3 = int.Parse(v4[0]) - 1
+                                    };
+
+                                    face2.SetFaceNormal(
+                                        mesh.Normals[int.Parse(v1[2]) - 1],
+                                        mesh.Normals[int.Parse(v3[2]) - 1],
+                                        mesh.Normals[int.Parse(v4[2]) - 1]
+                                    );
+                                    mesh.Faces.Add(face2);
+                                }
+
                             }
                             else
                             {
@@ -71,6 +90,19 @@ namespace Engine.Util
                                 };
 
                                 mesh.Faces.Add(face);
+
+                                if (parts.Length == 5)
+                                {
+                                    string[] v4 = parts[4].Split(['/']);
+                                    Face face2 = new Face(mesh)
+                                    {
+                                        Vertex1 = int.Parse(parts[1]) - 1,
+                                        Vertex2 = int.Parse(parts[3]) - 1,
+                                        Vertex3 = int.Parse(parts[4]) - 1
+                                    };
+
+                                    mesh.Faces.Add(face2);
+                                }
 
                             }
                             break;

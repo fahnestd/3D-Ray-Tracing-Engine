@@ -36,13 +36,37 @@ namespace Viewer
                     bitmap.SetPixel(x, y, Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));  
                 }
             }
-            e.Graphics.DrawImage(bitmap, new Point(0, 0));
+
+            float imageAspect = (float)Tracer.Width / Tracer.Height;
+            float formAspect = (float)Width / Height;
+
+            int drawWidth, drawHeight, drawX, drawY;
+            if (imageAspect > formAspect)
+            {
+                // Image is wider than the form
+                drawWidth = Width;
+                drawHeight = (int)(Width / imageAspect);
+                drawX = 0;
+                drawY = (Height - drawHeight) / 2; // Center vertically
+            }
+            else
+            {
+                // Image is taller than the form
+                drawHeight = Height;
+                drawWidth = (int)(Height * imageAspect);
+                drawX = (Width - drawWidth) / 2; // Center horizontally
+                drawY = 0;
+            }
+            drawHeight = Math.Min(Height, drawHeight);
+            drawWidth = Math.Min(Width, drawWidth);
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            e.Graphics.DrawImage(bitmap, new Rectangle(drawX, drawY, drawWidth, drawHeight), new Rectangle(0, 0, Tracer.Width, Tracer.Height), GraphicsUnit.Pixel);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // Create a new Scene and load in a sample
-            scene = SampleScenes.TeapotOBJ();
+            scene = SampleScenes.PlantOBJ();
             // Create a new camera facing the positive Z direction
             Camera camera = new Camera(new Vector3(0,0,-4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
             scene.AddCamera(camera);
@@ -50,6 +74,8 @@ namespace Viewer
             // Calculates lighting for the scene
             scene.PreCalculateLighting();
             Tracer = new BVHTracer(scene);
+            Tracer.Width = Width;
+            Tracer.Height = Height;
             var sw = Stopwatch.StartNew();
             Tracer.GetCollisionBuffer();
             sw.Stop();

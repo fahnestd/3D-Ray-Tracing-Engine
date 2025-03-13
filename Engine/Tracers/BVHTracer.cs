@@ -58,15 +58,16 @@ namespace Engine.Tracers
                 Vector3 v2 = mesh.Vertices[face.Vertex3];
 
                 // Normal = (v1 - v0) x (v2 - v0)
-                Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
-                normal = Vector3.Normalize(normal);
+                //Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
+                //normal = Vector3.Normalize(normal);
+                Vector3 normal = face.Normal;
 
                 // find the distance from the plane
                 float planeDistance = -Vector3.Dot(normal, v0);
                 float rayDirectionDotNormal = Vector3.Dot(normal, ray.Direction);
 
                 // If the ray is parallel or close to, we skip it and assume it doesn't hit
-                if (Math.Abs(rayDirectionDotNormal) < 1e-7) // Ray is parallel to the plane
+                if (Math.Abs(rayDirectionDotNormal) < 1e-10) // Ray is parallel to the plane
                     continue;
 
                 // Intersection Distance = -(N · O + d) / (N · D)
@@ -101,6 +102,8 @@ namespace Engine.Tracers
                     collision.CollisionPoint = intersectionPoint;
                     collision.Distance = intersectionDistance;
                 }
+
+
             }
         }
 
