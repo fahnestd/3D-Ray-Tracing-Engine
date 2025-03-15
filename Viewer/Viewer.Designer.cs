@@ -41,6 +41,7 @@
             Text = "3D Ray Tracing Engine Demo";
             Load += Form1_Load;
             Paint += Form1_Paint;
+            Resize += Viewer_Resize;
             ResumeLayout(false);
         }
 

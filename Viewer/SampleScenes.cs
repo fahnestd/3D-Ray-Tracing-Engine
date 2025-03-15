@@ -143,13 +143,38 @@ namespace Viewer
             };
             scene.AddLight(light1);
 
-            Light light2 = new Light
-            {
-                Position = new Vector3(-8, 2, -4),
-                Direction = VectorFunctions.PointAt(new Vector3(-8, 2, -4), Vector3.Zero),
-            };
+            return scene;
+        }
 
-            scene.AddLight(light2);
+        public static Scene HandOBJ()
+        {
+            Scene scene = new Scene();
+            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/hand.obj");
+            if (mesh != null)
+            {
+                mesh.SetColor(PixelColor.FromRGB(200, 200, 200));
+                mesh.Reflectivity = 0f;
+                mesh.Scale(.15f);
+                mesh.Transform(new Vector3(0, -1.5f, 0));
+                scene.AddMesh(mesh);
+            }
+
+            // Import a square object and set reflectivity to 100% like a mirror
+            Mesh? mesh2 = Import.FromObjectFile("../../../assets/obj/reflector.obj");
+            if (mesh2 != null)
+            {
+                //mesh2.CalculateNormalsFromVertices();
+                mesh2.SetColor(PixelColor.FromRGB(10, 20, 10));
+                mesh2.Reflectivity = 1f;
+                scene.AddMesh(mesh2);
+            }
+
+            Light light1 = new Light
+            {
+                Position = new Vector3(3, 2, -4),
+                Direction = VectorFunctions.PointAt(new Vector3(3, 2, -4), Vector3.Zero),
+            };
+            scene.AddLight(light1);
 
             return scene;
         }

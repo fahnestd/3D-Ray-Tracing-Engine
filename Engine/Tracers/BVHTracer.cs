@@ -58,9 +58,8 @@ namespace Engine.Tracers
                 Vector3 v2 = mesh.Vertices[face.Vertex3];
 
                 // Normal = (v1 - v0) x (v2 - v0)
-                //Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
-                //normal = Vector3.Normalize(normal);
-                Vector3 normal = face.Normal;
+                Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
+                normal = Vector3.Normalize(normal);
 
                 // find the distance from the plane
                 float planeDistance = -Vector3.Dot(normal, v0);
