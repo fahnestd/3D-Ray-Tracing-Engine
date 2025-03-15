@@ -20,7 +20,6 @@ namespace Viewer
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             e.Graphics.Clear(Color.Black);
 
             if (Tracer == null || Tracer.CollisionBuffer == null) return;
@@ -32,14 +31,14 @@ namespace Viewer
                 {
                     if (!Tracer.CollisionBuffer[x, y].DidCollide)
                     {
+                        bitmap.SetPixel(x, y, Color.Black);
                         continue;
                     }
                     const int MIN_RGB = (int)(MINBRIGHTNESS * 255);
-                    Brush pixelBrush = new SolidBrush(Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
                     bitmap.SetPixel(x, y, Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
                 }
             }
-
+            bitmap.Save("plant.bmp");
             float imageAspect = (float)Tracer.Width / Tracer.Height;
             float formAspect = (float)Width / Height;
 
