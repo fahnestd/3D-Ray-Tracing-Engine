@@ -17,7 +17,7 @@ namespace Engine.Tracers
 
         public abstract Collision RayTrace(Ray ray);
 
-        public Collision[,] GetCollisionBuffer()
+        public void GenerateCollisionBuffer(bool ShowReflections = true)
         {
             // Create a new RayGenerator and specify the camera, height, and width in pixels
             RayGenerator rayGenerator = new RayGenerator(scene.Cameras[Scene.ActiveCamera], Width, Height);
@@ -36,11 +36,13 @@ namespace Engine.Tracers
             });
            
             CollisionBuffer = collisionBuffer;
-            LayerReflect();
-            return CollisionBuffer;
+            if (ShowReflections)
+            {
+                LayerReflect();
+            }
         }
 
-        public void LayerReflect()
+        private void LayerReflect()
         {
             if (CollisionBuffer == null)
             {

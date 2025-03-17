@@ -1,7 +1,7 @@
 using Engine.Components;
+using Engine.Renderer;
 using Engine.Tracers;
 using System.Diagnostics;
-using System.Numerics;
 
 namespace Viewer
 {
@@ -11,7 +11,7 @@ namespace Viewer
 
         private Tracer? Tracer;
 
-        private const float MINBRIGHTNESS = 0.05f;
+        private Bitmap? bitmap;
 
         public Viewer()
         {
@@ -22,22 +22,8 @@ namespace Viewer
         {
             e.Graphics.Clear(Color.Black);
 
-            if (Tracer == null || Tracer.CollisionBuffer == null) return;
+            if (bitmap == null) return;
 
-            Bitmap bitmap = new Bitmap(Width, Height);
-            for (int x = 0; x < Tracer.Width; x++)
-            {
-                for (int y = 0; y < Tracer.Height; y++)
-                {
-                    if (!Tracer.CollisionBuffer[x, y].DidCollide)
-                    {
-                        bitmap.SetPixel(x, y, Color.Black);
-                        continue;
-                    }
-                    const int MIN_RGB = (int)(MINBRIGHTNESS * 255);
-                    bitmap.SetPixel(x, y, Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
-                }
-            }
             float imageAspect = (float)Tracer.Width / Tracer.Height;
             float formAspect = (float)Width / Height;
 
@@ -60,7 +46,7 @@ namespace Viewer
             }
             drawHeight = Math.Min(Height, drawHeight);
             drawWidth = Math.Min(Width, drawWidth);
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
             e.Graphics.DrawImage(bitmap, new Rectangle(drawX, drawY, drawWidth, drawHeight), new Rectangle(0, 0, Tracer.Width, Tracer.Height), GraphicsUnit.Pixel);
         }
 
@@ -68,19 +54,22 @@ namespace Viewer
         {
             // Create a new Scene and load in a sample
             scene = SampleScenes.PlantOBJ();
-            // Create a new camera facing the positive Z direction
-            Camera camera = new Camera(new Vector3(0, 0, -4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
-            scene.AddCamera(camera);
 
             // Calculates lighting for the scene
             scene.PreCalculateLighting();
+
             Tracer = new BVHTracer(scene);
+
+            // Set Tracer width and height to match the screen size
             Tracer.Width = Width;
             Tracer.Height = Height;
+
             var sw = Stopwatch.StartNew();
-            Tracer.GetCollisionBuffer();
+            Tracer.GenerateCollisionBuffer();
             sw.Stop();
             Debug.WriteLine($"Successfully traced scene in {sw.ElapsedMilliseconds} ms");
+
+            bitmap = BitmapRenderer.RenderBitmap(Tracer, Width, Height);
 
             Invalidate();
         }
@@ -88,6 +77,31 @@ namespace Viewer
         private void Viewer_Resize(object sender, EventArgs e)
         {
             Invalidate();
+        }
+
+        private void Viewer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Control.ModifierKeys == Keys.Control) && e.KeyChar == '\u0013')
+            {
+                if (bitmap == null)
+                {
+                    return;
+                }
+                e.Handled = true; // Mark the event as handled
+
+                // Create and configure SaveFileDialog
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Bitmap Files (*.bmp)|*.bmp";
+                saveFileDialog.Title = "Save Bitmap";
+                saveFileDialog.DefaultExt = "bmp";
+
+                // Show dialog and get file path
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    bitmap.Save(filePath);
+                }
+            }
         }
     }
 }
