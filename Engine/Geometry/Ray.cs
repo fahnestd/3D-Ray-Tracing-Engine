@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace Engine.Util
+namespace Engine.Geometry
 {
     public record Ray
     {

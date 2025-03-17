@@ -1,4 +1,5 @@
 ﻿using Engine.Components;
+using Engine.Geometry;
 using Engine.Util;
 using System.Numerics;
 
@@ -57,7 +58,7 @@ namespace Viewer
         public static Scene PawnOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/pawn.obj");
+            Mesh? mesh = ObjectFileImporter.FromFile("../../../assets/obj/pawn.obj");
             if (mesh != null)
             {
                 mesh.Scale(.5f);
@@ -77,7 +78,7 @@ namespace Viewer
         public static Scene TeapotOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/teapot.obj");
+            Mesh? mesh = ObjectFileImporter.FromFile("../../../assets/obj/teapot.obj");
             if (mesh != null)
             {
                 mesh.SetColor(PixelColor.FromRGB(255, 0, 0));
@@ -86,7 +87,7 @@ namespace Viewer
             }
 
             // Import a square object and set reflectivity to 100% like a mirror
-            Mesh? mesh2 = Import.FromObjectFile("../../../assets/obj/reflector.obj");
+            Mesh? mesh2 = ObjectFileImporter.FromFile("../../../assets/obj/reflector.obj");
             if (mesh2 != null)
             {
                 mesh2.SetColor(PixelColor.FromRGB(100, 255, 100));
@@ -116,7 +117,7 @@ namespace Viewer
         public static Scene PlantOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/plant.obj");
+            Mesh? mesh = ObjectFileImporter.FromFile("../../../assets/obj/plant.obj");
             if (mesh != null)
             {
                 mesh.SetColor(PixelColor.FromRGB(200, 200, 200));
@@ -127,7 +128,7 @@ namespace Viewer
             }
 
             // Import a square object and set reflectivity to 100% like a mirror
-            Mesh? mesh2 = Import.FromObjectFile("../../../assets/obj/reflector.obj");
+            Mesh? mesh2 = ObjectFileImporter.FromFile("../../../assets/obj/reflector.obj");
             if (mesh2 != null)
             {
                 //mesh2.CalculateNormalsFromVertices();
@@ -149,7 +150,7 @@ namespace Viewer
         public static Scene HandOBJ()
         {
             Scene scene = new Scene();
-            Mesh? mesh = Import.FromObjectFile("../../../assets/obj/hand.obj");
+            Mesh? mesh = ObjectFileImporter.FromFile("../../../assets/obj/hand.obj");
             if (mesh != null)
             {
                 mesh.SetColor(PixelColor.FromRGB(200, 200, 200));
@@ -160,7 +161,7 @@ namespace Viewer
             }
 
             // Import a square object and set reflectivity to 100% like a mirror
-            Mesh? mesh2 = Import.FromObjectFile("../../../assets/obj/reflector.obj");
+            Mesh? mesh2 = ObjectFileImporter.FromFile("../../../assets/obj/reflector.obj");
             if (mesh2 != null)
             {
                 //mesh2.CalculateNormalsFromVertices();

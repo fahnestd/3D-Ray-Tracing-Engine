@@ -1,4 +1,5 @@
 using Engine.Components;
+using Engine.Geometry;
 using Engine.Tracers;
 using Engine.Util;
 using System.Numerics;
