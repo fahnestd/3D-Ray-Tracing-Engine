@@ -1,8 +1,8 @@
-﻿
-using Engine.Components;
+﻿using Engine.Components;
+using Engine.Util;
 using System.Numerics;
 
-namespace Engine.Util
+namespace Engine.Geometry
 {
     public class Face
     (
@@ -12,7 +12,19 @@ namespace Engine.Util
         public int Vertex1;
         public int Vertex2;
         public int Vertex3;
+
         public Vector3 Normal = Vector3.Zero;
+
+        public bool HasVertexNormals = false;
+
+        public int Vertex1Normal;
+        public int Vertex2Normal;
+        public int Vertex3Normal;
+
+        public float Vertex1Lightness = 0;
+        public float Vertex2Lightness = 0;
+        public float Vertex3Lightness = 0;
+
         public PixelColor color = CurrentColor;
         public float shininess = 0f;
         public float lightness = 0f;
@@ -32,11 +44,6 @@ namespace Engine.Util
         {
 
             Normal = Vector3.Normalize((v1Normal + v2Normal + v3Normal) / 3);
-        }
-
-        public void CalculateLightEffect(Light light)
-        {
-            lightness += Math.Abs(Vector3.Dot(Normal, light.Direction));
         }
 
         public Vector3 Center

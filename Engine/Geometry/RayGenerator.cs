@@ -1,7 +1,8 @@
 ﻿using Engine.Components;
+using Engine.Util;
 using System.Numerics;
 
-namespace Engine.Util
+namespace Engine.Geometry
 {
     public class RayGenerator
     {
@@ -26,7 +27,7 @@ namespace Engine.Util
             float aspectRatio = width / (float)height;
 
             // Camera FOV will be the vertical field of view. We can use this to calculate the view height using 2tan(FOV/2)
-            _viewHeight = 2.0f * MathF.Tan(Common.ToRadians(_camera.FieldOfView) / 2.0f);
+            _viewHeight = 2.0f * MathF.Tan(Converters.ToRadians(_camera.FieldOfView) / 2.0f);
             _viewWidth = _viewHeight * aspectRatio;
         }
 

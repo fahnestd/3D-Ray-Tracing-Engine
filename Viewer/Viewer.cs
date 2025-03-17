@@ -38,7 +38,6 @@ namespace Viewer
                     bitmap.SetPixel(x, y, Color.FromArgb(Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.R)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.G)), Math.Max(MIN_RGB, (int)(Tracer.CollisionBuffer[x, y].Color.B))));
                 }
             }
-            bitmap.Save("plant.bmp");
             float imageAspect = (float)Tracer.Width / Tracer.Height;
             float formAspect = (float)Width / Height;
 

@@ -1,5 +1,6 @@
 using Engine.BVH;
 using Engine.Components;
+using Engine.Geometry;
 using Engine.Util;
 using System.Numerics;
 
@@ -58,8 +59,8 @@ namespace Engine.Tracers
                 Vector3 v2 = mesh.Vertices[face.Vertex3];
 
                 // Normal = (v1 - v0) x (v2 - v0)
-                Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
-                normal = Vector3.Normalize(normal);
+
+                Vector3 normal = face.Normal;
 
                 // find the distance from the plane
                 float planeDistance = -Vector3.Dot(normal, v0);
@@ -96,10 +97,18 @@ namespace Engine.Tracers
                     collision.Ray = ray.Direction;
                     collision.DidCollide = true;
                     collision.Face = face;
-                    collision.Color = collision.Face.color * collision.Face.lightness;
+                    // TODO: Move this calculation out of the tracer
                     collision.CollisionNormal = normal;
                     collision.CollisionPoint = intersectionPoint;
                     collision.Distance = intersectionDistance;
+                    if (face.HasVertexNormals)
+                    {
+                        collision.Color = collision.Face.color * collision.GetLightness(); 
+                    } 
+                    else
+                    {
+                        collision.Color = collision.Face.color * face.lightness;
+                    }
                 }
 
 

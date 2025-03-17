@@ -1,13 +1,14 @@
 ﻿using Engine.Components;
+using Engine.Geometry;
 using System.Numerics;
 
 namespace Engine.Util
 {
-    public class Import
+    public class ObjectFileImporter
     {
         private static readonly char[] space_separator = [' '];
 
-        public static Mesh? FromObjectFile(string filename)
+        public static Mesh? FromFile(string filename)
         {
             try
             {
@@ -53,11 +54,12 @@ namespace Engine.Util
                                     Vertex3 = int.Parse(v3[0]) - 1
                                 };
 
-                                face.SetFaceNormal(
-                                    mesh.Normals[int.Parse(v1[2]) - 1],
-                                    mesh.Normals[int.Parse(v2[2]) - 1],
-                                    mesh.Normals[int.Parse(v3[2]) - 1]
-                                );
+                                face.CalculateNormalFromVertices();
+                                face.HasVertexNormals = true;
+
+                                face.Vertex1Normal = int.Parse(v1[2]) - 1;
+                                face.Vertex2Normal = int.Parse(v2[2]) - 1;
+                                face.Vertex3Normal = int.Parse(v3[2]) - 1;
 
                                 mesh.Faces.Add(face);
 
@@ -71,11 +73,13 @@ namespace Engine.Util
                                         Vertex3 = int.Parse(v4[0]) - 1
                                     };
 
-                                    face2.SetFaceNormal(
-                                        mesh.Normals[int.Parse(v1[2]) - 1],
-                                        mesh.Normals[int.Parse(v3[2]) - 1],
-                                        mesh.Normals[int.Parse(v4[2]) - 1]
-                                    );
+                                    face2.CalculateNormalFromVertices();
+                                    face2.HasVertexNormals = true;
+
+                                    face2.Vertex1Normal = int.Parse(v1[2]) - 1;
+                                    face2.Vertex2Normal = int.Parse(v3[2]) - 1;
+                                    face2.Vertex3Normal = int.Parse(v4[2]) - 1;
+
                                     mesh.Faces.Add(face2);
                                 }
 

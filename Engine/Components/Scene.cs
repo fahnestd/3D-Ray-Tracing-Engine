@@ -1,4 +1,4 @@
-using Engine.Util;
+using Engine.Geometry;
 using System.Diagnostics;
 using System.Numerics;
 
@@ -41,9 +41,8 @@ namespace Engine.Components
                 {
                     foreach (Light light in Lights)
                     {
-                        face.CalculateLightEffect(light);
+                        light.ApplyFaceLighting(face);
                     }
-
                 }
             }
         }

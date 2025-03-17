@@ -1,6 +1,6 @@
 ﻿namespace Engine.Util
 {
-    internal class Common
+    internal class Converters
     {
         public static float ToRadians(float degrees)
         {

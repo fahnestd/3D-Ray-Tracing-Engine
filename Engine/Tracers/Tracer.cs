@@ -1,4 +1,5 @@
 ﻿using Engine.Components;
+using Engine.Geometry;
 using Engine.Util;
 using System.Numerics;
 
@@ -50,7 +51,7 @@ namespace Engine.Tracers
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (CollisionBuffer[x, y].DidCollide)
+                    if (CollisionBuffer[x, y].DidCollide && CollisionBuffer[x, y].Face.shininess > 0)
                     {
                         Ray ray = new Ray
                         {
@@ -68,7 +69,14 @@ namespace Engine.Tracers
                         Collision collision = RayTrace(ray);
                         if (collision.DidCollide)
                         {
-                            CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, CollisionBuffer[x, y].Face.Mesh.Reflectivity);
+                            if (collision.Face.HasVertexNormals)
+                            {
+                                CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.GetLightness(), CollisionBuffer[x, y].Face.Mesh.Reflectivity);
+                            }
+                            else
+                            {
+                                CollisionBuffer[x, y].Color.LayerColor(collision.Face.color * collision.Face.lightness, CollisionBuffer[x, y].Face.Mesh.Reflectivity);
+                            }
                         }
                     }
                 }
