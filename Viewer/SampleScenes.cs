@@ -52,6 +52,10 @@ namespace Viewer
 
             scene.AddLight(light1);
 
+            // Create a new camera facing the positive Z direction
+            Camera camera = new Camera(new Vector3(0, 0, -4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            scene.AddCamera(camera);
+
             return scene;
         }
 
@@ -72,6 +76,10 @@ namespace Viewer
             };
 
             scene.AddLight(light1);
+
+            // Create a new camera facing the positive Z direction
+            Camera camera = new Camera(new Vector3(0, 0, -4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            scene.AddCamera(camera);
 
             return scene;
         }
@@ -111,6 +119,10 @@ namespace Viewer
 
             scene.AddLight(light2);
 
+            // Create a new camera facing the positive Z direction
+            Camera camera = new Camera(new Vector3(0, 0, -4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            scene.AddCamera(camera);
+
             return scene;
         }
 
@@ -144,6 +156,10 @@ namespace Viewer
             };
             scene.AddLight(light1);
 
+            // Create a new camera facing the positive Z direction
+            Camera camera = new Camera(new Vector3(0, 0, -4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            scene.AddCamera(camera);
+
             return scene;
         }
 
@@ -176,6 +192,10 @@ namespace Viewer
                 Direction = VectorFunctions.PointAt(new Vector3(3, 2, -4), Vector3.Zero),
             };
             scene.AddLight(light1);
+
+            // Create a new camera facing the positive Z direction
+            Camera camera = new Camera(new Vector3(0, 0, -4), Vector3.UnitZ, Vector3.UnitY, 60.0f);
+            scene.AddCamera(camera);
 
             return scene;
         }
