@@ -53,7 +53,7 @@ namespace Engine.Tracers
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (CollisionBuffer[x, y].DidCollide && CollisionBuffer[x, y].Face.shininess > 0)
+                    if (CollisionBuffer[x, y].DidCollide && CollisionBuffer[x, y].Face.Mesh.Reflectivity > 0)
                     {
                         Ray ray = new Ray
                         {
