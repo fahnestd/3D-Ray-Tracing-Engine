@@ -1,7 +1,7 @@
 # Basic Ray Tracing Engine
 A simple ray tracing engine implemented in C# using Windows Forms for visualization. This project demonstrates fundamental concepts of ray tracing including ray generation, camera systems, lighting, reflections, and basic geometry intersection.
 
-![Plant](https://github.com/user-attachments/assets/c869ed77-216c-4a73-b109-a560222df502)
+![Plant](https://github.com/user-attachments/assets/474a42ae-8790-44ab-8459-a9ce3a3541f3)
 
 # Technologies
 The engine is written in C# using the .NET framework. Otherwise, everything is written from scratch!
@@ -61,7 +61,7 @@ The engine supports loading a .obj file into the scene. If the obj support verte
 ```
 # Screenshots
 
-![Hand](https://github.com/user-attachments/assets/391e5e67-d18b-4697-8cbf-372551d1859d)
+![hand](https://github.com/user-attachments/assets/442bab9b-b201-4e33-a63e-86f044a3d8af)
 
 If no vertex normals are present, the scene renders without smooth shading:
 ![plant](https://github.com/user-attachments/assets/161ea509-9b34-4aaf-a491-b8ae9fc689f2)
