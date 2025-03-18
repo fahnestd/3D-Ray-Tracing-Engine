@@ -61,6 +61,8 @@ The engine supports loading a .obj file into the scene. If the obj support verte
 ```
 # Screenshots
 
+![dog](https://github.com/user-attachments/assets/e9005a8c-5f54-498b-beb0-f60ce7d4c9f3)
+
 ![hand](https://github.com/user-attachments/assets/442bab9b-b201-4e33-a63e-86f044a3d8af)
 
 If no vertex normals are present, the scene renders without smooth shading:
