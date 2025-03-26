@@ -17,15 +17,15 @@ namespace Engine.Util
         public static Vector3 CalculateBarycentricCoordinates(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 p)
         {
             // Create vectors
-            Vector3 v0 = v2 - v1;
+            Vector3 v0v = v2 - v1;
             Vector3 v1v = v3 - v1;
             Vector3 v2v = p - v1;
 
             // Compute dot products
-            float d00 = Vector3.Dot(v0, v0);
-            float d01 = Vector3.Dot(v0, v1v);
+            float d00 = Vector3.Dot(v0v, v0v);
+            float d01 = Vector3.Dot(v0v, v1v);
             float d11 = Vector3.Dot(v1v, v1v);
-            float d20 = Vector3.Dot(v2v, v0);
+            float d20 = Vector3.Dot(v2v, v0v);
             float d21 = Vector3.Dot(v2v, v1v);
 
             // Calculate barycentric coordinates
