@@ -1,5 +1,5 @@
-# Basic Ray Tracing Engine
-A simple ray tracing engine implemented in C# using Windows Forms for visualization. This project demonstrates fundamental concepts of ray tracing including ray generation, camera systems, lighting, reflections, and basic geometry intersection.
+# Ray Tracing Engine
+A high-performance ray tracing engine implemented in C# that demonstrates fundamental ray tracing techniques through a CPU-based rendering approach. The engine implements a Bounding Volume Hierarchy (BVH) acceleration structure to optimize ray-geometry intersection tests, dramatically reducing computational complexity from O(n) to O(log n) for scene traversal and intersection calculations.
 
 ![Plant](https://github.com/user-attachments/assets/474a42ae-8790-44ab-8459-a9ce3a3541f3)
 
@@ -7,13 +7,12 @@ A simple ray tracing engine implemented in C# using Windows Forms for visualizat
 The engine is written in C# using the .NET framework. Otherwise, everything is written from scratch!
 
 # How To Use
-1. Create a new scene
+1. Create a new scene object
 2. Create a new camera
-3. Create a mesh or import from OBJ file
-5. Add verticies to the mesh
-6. Add the mesh to the scene
-7. Add lights
-8. Run the tracing algorithm and draw your results
+3. Create a mesh and add verticies to it
+4. Add the mesh to the scene
+5. Add lights
+6. Run the tracing algorithm and output your results
 
 # Example
 ```C#
@@ -51,7 +50,7 @@ Tracer.GetCollisionBuffer();
 See the **[demo viewer](https://github.com/fahnestd/3D-Ray-Tracing-Engine/blob/master/Viewer/Viewer.cs)** for more about drawing to a window 
 
 # Loading from an OBJ file
-The engine supports loading a .obj file into the scene. If the obj support vertex normals, those will be loaded as well. The function can return null in the case of the file failing to load.
+The engine supports loading an .obj file into the scene. If the obj support vertex normals, those will be loaded as well. The function can return null in the case of the file failing to load.
 ```
  Mesh? mesh = Import.fromObjectFile("../../../assets/obj/pawn.obj");
  if (mesh != null)
@@ -59,6 +58,19 @@ The engine supports loading a .obj file into the scene. If the obj support verte
      scene.AddMesh(mesh);
  }
 ```
+
+# Testing
+This project uses NUnit for unit testing of the ray tracing engine.
+
+**Framework**: NUnit\
+**Test Project**: Separate test project within the solution\
+**Test Class Organization**: Each major component has a corresponding test class\
+**Setup and Teardown**: Utilized to prepare test environments and clean up resources
+
+### Running Tests
+To run the tests, use the following command in the project directory:\
+```dotnet test```
+
 # Screenshots
 
 ![dog](https://github.com/user-attachments/assets/e9005a8c-5f54-498b-beb0-f60ce7d4c9f3)
